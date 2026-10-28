@@ -2,2598 +2,1595 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=854, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=854, height=480, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Wii U Web stuff - by Yauheni Larchanka</title>
 <style>
-  /* =========================================================================
-     STRICT FLAT RETRO STYLING (NO GRADIENTS, NO BOX-SHADOWS, NO TEXT-SHADOWS)
-     Modeled directly after the reference screenshot ("3DS Web stuff")
-     Optimized for Nintendo Wii U NetFront NX Browser (854x480)
-     ========================================================================= */
+  /* Legacy WebKit / NetFront NX Reset - Zero Depth, Pure Flat Style */
   * {
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
-
   html, body {
-    width: 100%;
-    height: 100%;
+    width: 854px;
+    height: 480px;
     background-color: #000000;
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* Main wrapper centered for TV or fitting 854px GamePad */
-  #portal-root {
-    width: 100%;
-    max-width: 854px;
-    min-height: 480px;
+    overflow: hidden;
     margin: 0 auto;
-    background-color: #000000;
-    position: relative;
-    padding-bottom: 14px;
-  }
-
-  /* =========================================================================
-     TOP BANNER (Matches dark indigo #191233 & bright purple pill #7b12f5)
-     ========================================================================= */
-  #top-banner {
-    background-color: #191233;
-    width: 100%;
-    padding: 8px 14px 14px 14px;
     text-align: center;
+  }
+  /* Centered 854x480 Hardware Frame */
+  #wiiu-viewport {
+    width: 854px;
+    height: 480px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #000000;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  /* ==================== HUB VIEW ==================== */
+  #hub-view {
+    width: 854px;
+    height: 480px;
     position: relative;
   }
-
-  #title-pill {
+  /* Top Dark Blue/Indigo Banner (Matches Screenshot) */
+  #top-banner {
+    width: 780px;
+    height: 172px;
+    margin: 0 auto;
+    background-color: #191233;
+    position: relative;
+    padding-top: 6px;
+    text-align: center;
+  }
+  /* Flat Purple Rounded Pill Header */
+  #purple-pill {
+    width: 740px;
+    height: 54px;
+    margin: 0 auto;
     background-color: #7b12f5;
-    border-radius: 26px;
-    padding: 6px 20px 8px 20px;
-    max-width: 780px;
-    margin: 0 auto 10px auto;
+    -webkit-border-radius: 22px;
+    border-radius: 22px;
+    text-align: center;
+    padding-top: 3px;
   }
-
-  #title-pill h1 {
-    font-size: 36px;
+  #purple-pill h1 {
+    font-size: 27px;
     font-weight: bold;
     color: #ffffff;
-    line-height: 1.05;
-    letter-spacing: 0.5px;
+    line-height: 29px;
   }
-
-  #title-pill .author {
-    font-size: 18px;
+  #purple-pill p {
+    font-size: 14px;
     color: #ffffff;
-    margin-top: 2px;
+    line-height: 18px;
   }
-
   .banner-desc {
-    font-size: 17px;
+    font-size: 14px;
     color: #ffffff;
-    line-height: 1.3;
-    max-width: 680px;
-    margin: 0 auto 12px auto;
+    margin-top: 6px;
+    line-height: 17px;
   }
-
-  .controls-heading {
-    font-size: 18px;
+  .controls-title {
+    font-size: 14px;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 8px;
+    margin-top: 5px;
+    margin-bottom: 3px;
   }
-
-  .controls-grid {
-    display: inline-block;
-    text-align: left;
-    font-size: 18px;
+  #controls-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 14px;
     color: #cccccc;
-    line-height: 1.45;
   }
-
-  .controls-row {
-    display: flex;
-    justify-content: flex-start;
-    gap: 24px;
+  #controls-table td {
+    padding: 1px 14px;
+    text-align: left;
   }
-
-  .ctrl-item {
-    min-width: 175px;
-    white-space: nowrap;
-  }
-
-  .ctrl-box {
+  .btn-glyph {
     display: inline-block;
-    width: 12px;
-    height: 16px;
-    border: 2px solid #cccccc;
-    vertical-align: -2px;
-    margin-right: 5px;
+    border: 1px solid #cccccc;
+    padding: 0 4px;
+    font-size: 11px;
+    color: #ffffff;
+    margin-right: 4px;
   }
 
-  /* =========================================================================
-     EASTER EGG: 8-BIT MARIO SPRITE ON BOTTOM-LEFT CORNERS OF TOP BANNER
-     ========================================================================= */
-  #mario-easter-egg {
+  /* 8-Bit Mario Easter Egg on Bottom-Left Bezel of Top Banner */
+  #mario-sprite {
     position: absolute;
+    bottom: 0px;
     left: 18px;
-    bottom: -2px;
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
     z-index: 10;
   }
-
-  #mario-easter-egg.hop {
-    bottom: 18px;
+  #mario-sprite.jump {
+    bottom: 24px;
   }
 
-  #mario-bubble {
-    position: absolute;
-    left: 70px;
-    bottom: 14px;
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 3px 7px;
-    border-radius: 6px;
-    display: none;
-    white-space: nowrap;
+  /* Navigation Tabs Bar (Centered with Table Layout for Wii U WebKit) */
+  #tabs-wrap {
+    width: 660px;
+    height: 28px;
+    margin: 0 auto;
+    background-color: #000000;
   }
-
-  /* =========================================================================
-     TABS & SCROLLABLE LIST BOX (Matches reference layout strictly)
-     ========================================================================= */
-  #hub-content {
-    width: 82%;
-    max-width: 660px;
-    margin: 6px auto 0 auto;
-  }
-
-  #tab-bar {
-    display: flex;
+  #tabs-table {
     width: 100%;
-    gap: 3px;
+    height: 28px;
+    border-collapse: collapse;
+    table-layout: fixed;
   }
-
-  .tab-btn {
-    flex: 1;
+  .tab-cell {
     background-color: #633483;
     color: #ffffff;
-    border: none;
-    padding: 5px 4px;
-    font-size: 17px;
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    font-size: 15px;
     cursor: pointer;
+    border-right: 3px solid #000000;
+    vertical-align: middle;
   }
-
-  .tab-btn.active {
+  .tab-cell:last-child {
+    border-right: none;
+  }
+  .tab-cell.active {
     background-color: #850800;
-    color: #ffffff;
+    font-weight: bold;
   }
 
-  .tab-btn.kb-focus {
-    outline: 2px solid #ffffff;
-  }
-
-  /* Scrollable list area with flat light-gray scrollbar on the right */
-  #list-frame {
-    width: 100%;
-    height: 256px;
+  /* Main List Area + Flat White/Gray Scrollbar (Matches Screenshot) */
+  #list-outer {
+    width: 660px;
+    height: 274px;
+    margin: 0 auto;
     background-color: #1b1730;
-    border-top: 2px solid #0d0a1a;
-    border-bottom: 6px solid #2b2927;
-    display: flex;
     position: relative;
+    border-bottom: 6px solid #2b2927;
   }
-
-  #item-list {
-    flex: 1;
-    height: 100%;
+  #list-scroll {
+    width: 634px;
+    height: 268px;
     overflow-y: scroll;
     overflow-x: hidden;
+    float: left;
   }
-
-  /* Flat scrollbar styling for WebKit / NetFront NX */
-  #item-list::-webkit-scrollbar {
-    width: 22px;
+  /* Custom Flat Right Scrollbar for Wii U & Stylus */
+  #custom-scrollbar {
+    width: 26px;
+    height: 268px;
+    background-color: #ffffff;
+    float: right;
+    position: relative;
   }
-  #item-list::-webkit-scrollbar-track {
+  .scroll-arrow {
+    width: 26px;
+    height: 24px;
+    background-color: #ffffff;
+    color: #777777;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  #scroll-track {
+    width: 26px;
+    height: 220px;
+    position: relative;
     background-color: #ffffff;
   }
-  #item-list::-webkit-scrollbar-thumb {
+  #scroll-thumb {
+    width: 18px;
+    height: 64px;
     background-color: #808080;
-    border-radius: 8px;
-    border: 3px solid #ffffff;
+    -webkit-border-radius: 9px;
+    border-radius: 9px;
+    position: absolute;
+    left: 4px;
+    top: 4px;
   }
 
-  .list-row {
-    display: flex;
-    align-items: flex-start;
+  /* App Cards inside List */
+  .app-row {
+    width: 100%;
+    height: 82px;
+    border-bottom: 2px solid #120e24;
     padding: 8px 10px;
-    border-bottom: 2px solid #292346;
-    background-color: #1b1730;
     cursor: pointer;
-    min-height: 82px;
+    position: relative;
+    background-color: #1b1730;
   }
-
-  .list-row:hover, .list-row.selected-row {
-    background-color: #282147;
+  .app-row.focused {
+    background-color: #2f2554;
+    outline: 2px solid #ffffff;
   }
-
-  .item-icon {
-    width: 68px;
-    height: 68px;
+  .app-icon {
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin-right: 12px;
+    -webkit-border-radius: 6px;
     border-radius: 6px;
-    flex-shrink: 0;
-    margin-right: 10px;
+    background-color: #ffffff;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-
-  .item-info {
-    flex: 1;
+  .app-info {
+    float: left;
+    width: 520px;
     text-align: left;
   }
-
-  .item-title {
+  .app-title {
     font-size: 18px;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 2px;
+    line-height: 22px;
   }
-
-  .item-desc {
+  .app-desc {
     font-size: 13px;
-    color: #ffffff;
-    line-height: 1.25;
+    color: #dddddd;
+    line-height: 17px;
   }
-
-  .item-badges {
-    margin-top: 4px;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .badge-pill {
+  .app-badge {
     display: inline-block;
-    background-color: #9c7ae6;
+    background-color: #a37cf0;
     color: #ffffff;
-    font-size: 13px;
+    font-size: 12px;
     padding: 1px 10px;
+    -webkit-border-radius: 10px;
     border-radius: 10px;
+    margin-top: 3px;
   }
 
-  .badge-pill.gw {
-    background-color: #8c6d1f;
-  }
-
-  .badge-pill.tool {
-    background-color: #2b7a78;
-  }
-
-  /* =========================================================================
-     PERSISTENT SUB-APP VIEW (854x480 Optimized Full Screen View)
-     ========================================================================= */
+  /* ==================== SUB-APP VIEW (854x480 FIT) ==================== */
   #app-view {
     display: none;
-    width: 100%;
-    max-width: 854px;
-    min-height: 480px;
+    width: 854px;
+    height: 480px;
     background-color: #191233;
-    border: 2px solid #292346;
+    position: relative;
   }
-
-  #app-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #0f0a21;
-    padding: 6px 10px;
-    border-bottom: 2px solid #633483;
-    height: 46px;
-  }
-
-  .flat-btn {
-    background-color: #633483;
-    color: #ffffff;
-    border: 2px solid #9c7ae6;
-    padding: 5px 12px;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .flat-btn:active {
-    background-color: #850800;
-  }
-
-  .flat-btn.red {
-    background-color: #850800;
-    border-color: #ff5544;
-  }
-
-  .flat-btn.green {
-    background-color: #1f6f3d;
-    border-color: #52be80;
-  }
-
-  .flat-btn.purple {
+  #app-topbar {
+    width: 854px;
+    height: 42px;
     background-color: #7b12f5;
-    border-color: #b37aff;
+    padding: 5px 12px;
   }
-
-  #app-title-bar {
+  #back-btn {
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    background-color: #850800;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 14px;
+    cursor: pointer;
+    border: none;
+  }
+  #app-header-title {
+    float: left;
+    line-height: 32px;
+    margin-left: 16px;
     font-size: 19px;
     font-weight: bold;
     color: #ffffff;
-    text-align: center;
   }
-
+  #gamepad-status {
+    float: right;
+    line-height: 32px;
+    font-size: 12px;
+    color: #e2d4ff;
+  }
   #app-stage {
-    width: 100%;
-    min-height: 430px;
+    width: 854px;
+    height: 438px;
     padding: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     position: relative;
+    overflow: hidden;
   }
 
-  /* =========================================================================
-     SHARED GAME CONTROLS & ON-SCREEN D-PAD FOR WII U TOUCHSCREEN
-     ========================================================================= */
-  .toolbar-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-
-  .status-pill {
-    background-color: #292346;
+  /* Shared Flat UI Controls inside Games */
+  .flat-btn {
+    display: inline-block;
+    background-color: #633483;
     color: #ffffff;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 15px;
+    border: 2px solid #ffffff;
+    padding: 6px 14px;
+    font-size: 14px;
     font-weight: bold;
+    cursor: pointer;
+    margin: 2px 4px;
   }
-
-  .dpad-pad {
-    display: grid;
-    grid-template-columns: 52px 52px 52px;
-    grid-template-rows: 52px 52px 52px;
-    gap: 4px;
-    user-select: none;
+  .flat-btn.active, .flat-btn:active {
+    background-color: #850800;
   }
-
+  .game-layout-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .game-layout-table td {
+    vertical-align: middle;
+    padding: 4px 10px;
+  }
+  canvas.game-canvas {
+    background-color: #0d0a1a;
+    border: 2px solid #ffffff;
+    display: block;
+    margin: 0 auto;
+  }
+  /* On-Screen Touch D-Pad */
+  .dpad-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
   .dpad-btn {
-    background-color: #362d59;
+    width: 52px;
+    height: 52px;
+    background-color: #633483;
     color: #ffffff;
-    border: 2px solid #7b12f5;
-    border-radius: 6px;
-    font-size: 22px;
+    border: 2px solid #ffffff;
+    font-size: 20px;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    line-height: 48px;
     cursor: pointer;
   }
-
   .dpad-btn:active {
     background-color: #850800;
   }
 
-  /* =========================================================================
-     GAME & WATCH LCD CASING STYLING
-     ========================================================================= */
-  .gw-cabinet {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background-color: #d4af37;
-    border: 4px solid #8c6d1f;
-    border-radius: 12px;
-    padding: 10px 14px;
-    width: 100%;
-    max-width: 790px;
-  }
-
-  .gw-side-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    width: 110px;
-  }
-
-  .gw-logo-plate {
-    background-color: #850800;
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 4px 6px;
-    border: 2px solid #ffffff;
-    text-align: center;
-    letter-spacing: 0.5px;
-    width: 100%;
-  }
-
-  .gw-mode-btn {
-    background-color: #3b3b3b;
-    color: #ffffff;
-    border: 2px solid #1a1a1a;
-    border-radius: 12px;
-    padding: 5px 8px;
-    font-size: 12px;
-    font-weight: bold;
-    width: 96px;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .gw-mode-btn.active {
-    background-color: #850800;
-    border-color: #ffffff;
-  }
-
-  .gw-big-btn {
-    width: 82px;
-    height: 82px;
-    background-color: #b81414;
-    color: #ffffff;
-    border: 4px solid #590808;
-    border-radius: 41px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .gw-big-btn:active {
-    background-color: #ff2a2a;
-  }
-
-  .gw-screen-bezel {
-    background-color: #2b2927;
+  /* Game & Watch LCD Bezel */
+  #gw-cabinet {
+    width: 780px;
+    height: 416px;
+    margin: 0 auto;
+    background-color: #c7b687;
+    border: 4px solid #594b2a;
     padding: 8px;
-    border-radius: 6px;
-    border: 3px solid #141312;
+    color: #22251e;
   }
-
-  #gw-canvas {
-    background-color: #c5ccb8;
+  #gw-screen {
+    background-color: #9ead86;
+    border: 4px solid #3c4233;
     display: block;
-    border: 2px solid #4d5245;
+    margin: 0 auto;
   }
-
-  /* =========================================================================
-     TIC-TAC-TOE, MINESWEEPER, PICROSS, CALCULATOR, PAINT, TIMER GRIDS
-     ========================================================================= */
-  .ttt-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 92px);
-    grid-template-rows: repeat(3, 92px);
-    gap: 6px;
-    background-color: #0f0a21;
-    padding: 6px;
-    border-radius: 8px;
-  }
-
-  .ttt-cell {
-    background-color: #292346;
-    color: #ffffff;
-    font-size: 48px;
-    font-weight: bold;
-    border: 2px solid #633483;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .ttt-cell.win {
+  .gw-action-btn {
+    width: 96px;
+    height: 68px;
     background-color: #850800;
-    border-color: #ffffff;
-  }
-
-  .mine-board {
-    display: grid;
-    gap: 2px;
-    background-color: #0f0a21;
-    padding: 4px;
-    border: 2px solid #633483;
-  }
-
-  .mine-cell {
-    width: 32px;
-    height: 32px;
-    background-color: #633483;
     color: #ffffff;
+    border: 3px solid #3c4233;
     font-size: 16px;
     font-weight: bold;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
-  }
-
-  .mine-cell.revealed {
-    background-color: #1b1730;
-  }
-
-  .mine-cell.exploded {
-    background-color: #850800;
-  }
-
-  /* Calculator */
-  .calc-box {
-    background-color: #0f0a21;
-    border: 2px solid #633483;
-    border-radius: 8px;
-    padding: 10px;
-    width: 340px;
-  }
-
-  .calc-screen {
-    background-color: #c5ccb8;
-    color: #141a14;
-    font-family: "Courier New", monospace;
-    font-size: 28px;
-    font-weight: bold;
-    text-align: right;
-    padding: 8px 10px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    min-height: 48px;
-    overflow: hidden;
-  }
-
-  .calc-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-
-  .calc-key {
-    background-color: #292346;
-    color: #ffffff;
-    border: 2px solid #633483;
-    border-radius: 6px;
-    padding: 12px 4px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .calc-key.op {
-    background-color: #633483;
-  }
-
-  .calc-key.eq {
-    background-color: #850800;
-  }
-
-  .calc-key:active {
-    background-color: #7b12f5;
-  }
-
-  /* Responsive adjustments for smaller windows */
-  @media (max-width: 720px) {
-    #hub-content {
-      width: 96%;
-    }
-    #title-pill h1 {
-      font-size: 28px;
-    }
-    .controls-row {
-      flex-direction: column;
-      gap: 2px;
-    }
-    #mario-easter-egg {
-      left: 6px;
-    }
   }
 </style>
 </head>
 <body>
 
-<div id="portal-root">
-
-  <!-- =======================================================================
-       HUB HOME VIEW (Faithful to "3DS Web stuff" layout & colors)
-       ======================================================================= -->
+<div id="wiiu-viewport">
+  <!-- ==================== HUB SCREEN ==================== -->
   <div id="hub-view">
     <div id="top-banner">
-      <div id="title-pill">
+      <div id="purple-pill">
         <h1>Wii U Web stuff</h1>
-        <div class="author">by Yauheni Larchanka</div>
+        <p>by Yauheni Larchanka</p>
       </div>
-
-      <p class="banner-desc">
+      <div class="banner-desc">
         A little collection of games and other stuff designed for the<br>
         Nintendo Wii U online browser.
-      </p>
-
-      <div class="controls-heading">Gamepad controls</div>
-
-      <div class="controls-grid">
-        <div class="controls-row">
-          <div class="ctrl-item"><span class="ctrl-box"></span>Previous tab</div>
-          <div class="ctrl-item"><span class="ctrl-box"></span>Next tab</div>
-        </div>
-        <div class="controls-row">
-          <div class="ctrl-item"><span class="ctrl-box"></span>Scroll up</div>
-          <div class="ctrl-item"><span class="ctrl-box"></span>Scroll down</div>
-        </div>
       </div>
+      <div class="controls-title">Gamepad controls</div>
+      <table id="controls-table">
+        <tr>
+          <td><span class="btn-glyph">L</span>Previous tab</td>
+          <td><span class="btn-glyph">R</span>Next tab</td>
+        </tr>
+        <tr>
+          <td><span class="btn-glyph">Up</span>Scroll up</td>
+          <td><span class="btn-glyph">Down</span>Scroll down</td>
+        </tr>
+      </table>
 
-      <!-- Easter Egg: 8-bit classic Mario resting on bottom-left bezel -->
-      <div id="mario-easter-egg" title="Click Mario!">
-        <svg viewBox="0 0 16 16" width="48" height="48" shape-rendering="crispEdges">
-          <!-- Classic 8-bit Mario Pixel Sprite -->
-          <!-- Hat & Hair -->
-          <rect x="3" y="0" width="6" height="1" fill="#d82800"/>
-          <rect x="2" y="1" width="10" height="1" fill="#d82800"/>
-          <rect x="2" y="2" width="3" height="1" fill="#887000"/>
-          <rect x="5" y="2" width="3" height="1" fill="#fc9838"/>
-          <rect x="8" y="2" width="1" height="1" fill="#000000"/>
-          <rect x="9" y="2" width="1" height="1" fill="#fc9838"/>
-          <!-- Face -->
-          <rect x="1" y="3" width="1" height="1" fill="#887000"/>
-          <rect x="2" y="3" width="1" height="1" fill="#fc9838"/>
-          <rect x="3" y="3" width="1" height="1" fill="#887000"/>
-          <rect x="4" y="3" width="4" height="1" fill="#fc9838"/>
-          <rect x="8" y="3" width="1" height="1" fill="#000000"/>
-          <rect x="9" y="3" width="3" height="1" fill="#fc9838"/>
-          <rect x="1" y="4" width="1" height="1" fill="#887000"/>
-          <rect x="2" y="4" width="1" height="1" fill="#fc9838"/>
-          <rect x="3" y="4" width="2" height="1" fill="#887000"/>
-          <rect x="5" y="4" width="4" height="1" fill="#fc9838"/>
-          <rect x="9" y="4" width="1" height="1" fill="#887000"/>
-          <rect x="10" y="4" width="3" height="1" fill="#fc9838"/>
-          <!-- Mustache -->
-          <rect x="2" y="5" width="2" height="1" fill="#887000"/>
-          <rect x="4" y="5" width="4" height="1" fill="#fc9838"/>
-          <rect x="8" y="5" width="4" height="1" fill="#887000"/>
-          <rect x="3" y="6" width="8" height="1" fill="#fc9838"/>
-          <!-- Shirt & Overalls -->
-          <rect x="2" y="7" width="3" height="1" fill="#d82800"/>
-          <rect x="5" y="7" width="1" height="1" fill="#0058f8"/>
-          <rect x="6" y="7" width="3" height="1" fill="#d82800"/>
-          <rect x="1" y="8" width="3" height="1" fill="#d82800"/>
-          <rect x="4" y="8" width="1" height="1" fill="#0058f8"/>
-          <rect x="5" y="8" width="2" height="1" fill="#d82800"/>
-          <rect x="7" y="8" width="1" height="1" fill="#0058f8"/>
-          <rect x="8" y="8" width="3" height="1" fill="#d82800"/>
-          <rect x="0" y="9" width="4" height="1" fill="#d82800"/>
-          <rect x="4" y="9" width="4" height="1" fill="#0058f8"/>
-          <rect x="8" y="9" width="4" height="1" fill="#d82800"/>
-          <!-- Hands & Buttons -->
-          <rect x="0" y="10" width="2" height="1" fill="#fc9838"/>
-          <rect x="2" y="10" width="1" height="1" fill="#d82800"/>
-          <rect x="3" y="10" width="1" height="1" fill="#0058f8"/>
-          <rect x="4" y="10" width="1" height="1" fill="#fc9838"/>
-          <rect x="5" y="10" width="2" height="1" fill="#0058f8"/>
-          <rect x="7" y="10" width="1" height="1" fill="#fc9838"/>
-          <rect x="8" y="10" width="1" height="1" fill="#0058f8"/>
-          <rect x="9" y="10" width="1" height="1" fill="#d82800"/>
-          <rect x="10" y="10" width="2" height="1" fill="#fc9838"/>
-          <rect x="0" y="11" width="3" height="1" fill="#fc9838"/>
-          <rect x="3" y="11" width="6" height="1" fill="#0058f8"/>
-          <rect x="9" y="11" width="3" height="1" fill="#fc9838"/>
-          <rect x="0" y="12" width="2" height="1" fill="#fc9838"/>
-          <rect x="2" y="12" width="8" height="1" fill="#0058f8"/>
-          <rect x="10" y="12" width="2" height="1" fill="#fc9838"/>
-          <rect x="2" y="13" width="3" height="1" fill="#0058f8"/>
-          <rect x="7" y="13" width="3" height="1" fill="#0058f8"/>
-          <!-- Boots -->
-          <rect x="1" y="14" width="3" height="1" fill="#887000"/>
-          <rect x="8" y="14" width="3" height="1" fill="#887000"/>
-          <rect x="0" y="15" width="4" height="1" fill="#887000"/>
-          <rect x="8" y="15" width="4" height="1" fill="#887000"/>
-        </svg>
-      </div>
-      <div id="mario-bubble">1-UP! It's-a Mario!</div>
+      <!-- 8-Bit Retro Mario Easter Egg on Bezel -->
+      <canvas id="mario-sprite" width="36" height="36" title="Tap Mario!"></canvas>
     </div>
 
-    <!-- Lower Tabbed Container -->
-    <div id="hub-content">
-      <div id="tab-bar">
-        <button class="tab-btn active" data-tab="games">Games</button>
-        <button class="tab-btn" data-tab="gw">Game &amp; Watch</button>
-        <button class="tab-btn" data-tab="tools">Tools</button>
-        <button class="tab-btn" data-tab="about">About</button>
-      </div>
+    <!-- Flat Tabs Bar -->
+    <div id="tabs-wrap">
+      <table id="tabs-table">
+        <tr>
+          <td class="tab-cell active" onclick="switchTab(0)">Games</td>
+          <td class="tab-cell" onclick="switchTab(1)">Game &amp; Watch</td>
+          <td class="tab-cell" onclick="switchTab(2)">Other</td>
+          <td class="tab-cell" onclick="switchTab(3)">About</td>
+        </tr>
+      </table>
+    </div>
 
-      <div id="list-frame">
-        <div id="item-list"></div>
+    <!-- Scrollable List Container -->
+    <div id="list-outer">
+      <div id="list-scroll" onscroll="syncScrollbar()"></div>
+      <div id="custom-scrollbar">
+        <div class="scroll-arrow" onclick="scrollList(-82)">&#9650;</div>
+        <div id="scroll-track" onclick="trackJump(event)">
+          <div id="scroll-thumb"></div>
+        </div>
+        <div class="scroll-arrow" onclick="scrollList(82)">&#9660;</div>
       </div>
     </div>
   </div>
 
-  <!-- =======================================================================
-       PERSISTENT SUB-APP VIEW (Every Game & Tool runs inside here)
-       ======================================================================= -->
+  <!-- ==================== SUB-APP VIEW ==================== -->
   <div id="app-view">
-    <div id="app-header">
-      <button id="btn-return-hub" class="flat-btn red">&#9668; Return to Hub</button>
-      <div id="app-title-bar">Game Title</div>
-      <div style="display:flex; gap:6px;">
-        <button id="btn-sound-toggle" class="flat-btn">SFX: ON</button>
-        <button id="btn-app-reset" class="flat-btn purple">Reset</button>
-      </div>
+    <div id="app-topbar">
+      <button id="back-btn" onclick="returnToHub()">[B] Return to Hub</button>
+      <div id="app-header-title">Game Title</div>
+      <div id="gamepad-status">Wii U GamePad &amp; Touch Ready</div>
     </div>
     <div id="app-stage"></div>
   </div>
-
 </div>
 
 <script>
-/* ===========================================================================
-   AUDIO ENGINE (Web Audio API Retro 8-Bit & Game & Watch Piezo Beeps)
-   =========================================================================== */
-var SFX = {
-  enabled: true,
-  ctx: null,
-  init: function() {
-    if (!this.ctx) {
-      var AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) this.ctx = new AudioCtx();
+/* ============================================================================
+   1. AUDIO SYNTHESIZER (WebKit AudioContext + Safe Fallback)
+   ============================================================================ */
+var audioCtx = null;
+function beep(freq, dur, type) {
+  try {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) audioCtx = new AC();
     }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  },
-  beep: function(freq, duration, type) {
-    if (!this.enabled) return;
-    try {
-      this.init();
-      if (!this.ctx) return;
-      var osc = this.ctx.createOscillator();
-      var gain = this.ctx.createGain();
-      osc.type = type || 'square';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + duration);
-    } catch (e) {}
-  },
-  coin: function() {
-    var self = this;
-    this.beep(987.77, 0.08, 'square');
-    setTimeout(function() { self.beep(1318.51, 0.22, 'square'); }, 80);
-  },
-  gwTick: function() { this.beep(1200, 0.035, 'square'); },
-  gwCatch: function() { this.beep(1850, 0.07, 'square'); },
-  gwMiss: function() {
-    var self = this;
-    this.beep(320, 0.14, 'sawtooth');
-    setTimeout(function() { self.beep(220, 0.25, 'sawtooth'); }, 150);
-  },
-  win: function() {
-    var self = this;
-    var notes = [523, 659, 784, 1046];
-    for (var i = 0; i < notes.length; i++) {
-      (function(idx) {
-        setTimeout(function() { self.beep(notes[idx], 0.11, 'square'); }, idx * 100);
-      })(i);
+    if (!audioCtx) return;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = type || 'square';
+    osc.frequency.value = freq || 440;
+    gain.gain.value = 0.06;
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start ? osc.start(0) : osc.noteOn(0);
+    setTimeout(function() {
+      try { osc.stop ? osc.stop(0) : osc.noteOff(0); } catch(e){}
+    }, dur || 60);
+  } catch (e) {}
+}
+
+/* ============================================================================
+   2. 8-BIT MARIO SPRITE EASTER EGG
+   ============================================================================ */
+function drawMarioSprite() {
+  var c = document.getElementById('mario-sprite');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var grid = [
+    "....RRRRR.......",
+    "...RRRRRRRRR....",
+    "...BBBSSBS......",
+    "..BSBSSSBSSS....",
+    "..BSBBSSSBSSS...",
+    "..BBSSSSBBBB....",
+    "....SSSSSSS.....",
+    "...BBRBBRBB.....",
+    "..BBBRBBRBBB....",
+    "..BBBBRRRRBBB...",
+    "..SSRBYRRYBRSS..",
+    "..SSSRRRRRRSSS..",
+    "..SSRRRRRRRRSS..",
+    "....RRR..RRR....",
+    "...BBB....BBB...",
+    "..BBBB....BBBB.."
+  ];
+  var pal = { R: '#e52521', S: '#fca044', B: '#8b4513', Y: '#fbd000' };
+  for (var y = 0; y < 16; y++) {
+    for (var x = 0; x < 16; x++) {
+      var ch = grid[y].charAt(x);
+      if (pal[ch]) {
+        ctx.fillStyle = pal[ch];
+        ctx.fillRect(x * 2 + 2, y * 2 + 2, 2, 2);
+      }
     }
   }
-};
+  c.onclick = function() {
+    c.className = 'jump';
+    beep(659, 70);
+    setTimeout(function(){ beep(1318, 120); }, 80);
+    setTimeout(function(){ c.className = ''; }, 300);
+  };
+}
 
-/* ===========================================================================
-   CUSTOM PIXEL-ART SVG ICONS FOR ALL 13 APPS (Matches 3DS Web stuff icons)
-   =========================================================================== */
-var APP_CATALOG = [
-  // --- TAB: GAMES (5 Classic Minigames) ---
-  {
-    id: 'snake',
-    tab: 'games',
-    title: 'Snake',
-    desc: 'Eat apples to grow',
-    badges: [{ text: 'Wii U GamePad', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#76c442"/><rect x="0" y="0" width="16" height="16" fill="#63b030"/><rect x="32" y="0" width="16" height="16" fill="#63b030"/><rect x="16" y="16" width="16" height="16" fill="#63b030"/><rect x="48" y="16" width="16" height="16" fill="#63b030"/><rect x="0" y="32" width="16" height="16" fill="#63b030"/><rect x="32" y="32" width="16" height="16" fill="#63b030"/><rect x="16" y="48" width="16" height="16" fill="#63b030"/><rect x="48" y="48" width="16" height="16" fill="#63b030"/><circle cx="22" cy="24" r="9" fill="#ff1a1a"/><rect x="32" y="20" width="24" height="8" fill="#ffffff"/><rect x="48" y="20" width="8" height="32" fill="#ffffff"/></svg>'
-  },
-  {
-    id: 'minesweeper',
-    tab: 'games',
-    title: 'MineSweeper',
-    desc: "Don't touch a mine.",
-    badges: [{ text: 'Stylus Ready', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#ffffff"/><circle cx="32" cy="36" r="18" fill="#3a3548"/><polygon points="32,8 28,20 36,20" fill="#3a3548"/><polygon points="10,20 20,28 24,22" fill="#3a3548"/><polygon points="54,20 44,28 40,22" fill="#3a3548"/><polygon points="8,36 20,33 20,39" fill="#3a3548"/><polygon points="56,36 44,33 44,39" fill="#3a3548"/><circle cx="26" cy="31" r="3" fill="#231f2d"/><circle cx="38" cy="31" r="3" fill="#231f2d"/></svg>'
-  },
-  {
-    id: 'pong',
-    tab: 'games',
-    title: 'Pong',
-    desc: 'Classic paddle arcade vs CPU or 2-Player local.',
-    badges: [{ text: '1P / 2P Local', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#121024"/><rect x="30" y="4" width="4" height="56" stroke-dasharray="6,6" stroke="#555" stroke-width="4"/><rect x="8" y="14" width="6" height="22" fill="#ffffff"/><rect x="50" y="28" width="6" height="22" fill="#ffffff"/><rect x="26" y="24" width="8" height="8" fill="#7b12f5"/></svg>'
-  },
-  {
-    id: 'tictactoe',
-    tab: 'games',
-    title: 'Tic-Tac-Toe',
-    desc: 'Three in a row against Smart AI or a friend.',
-    badges: [{ text: 'AI + 2P Mode', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#ffffff"/><rect x="21" y="6" width="4" height="52" fill="#191233"/><rect x="39" y="6" width="4" height="52" fill="#191233"/><rect x="6" y="21" width="52" height="4" fill="#191233"/><rect x="6" y="39" width="52" height="4" fill="#191233"/><circle cx="13" cy="13" r="5" stroke="#850800" stroke-width="3" fill="none"/><path d="M27,27 L37,37 M37,27 L27,37" stroke="#7b12f5" stroke-width="3"/></svg>'
-  },
-  {
-    id: 'picross',
-    tab: 'games',
-    title: 'Picross',
-    desc: 'Solve 5x5 and 10x10 logic pixel-art nonograms.',
-    badges: [{ text: 'Stylus Logic', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#282147"/><rect x="8" y="8" width="14" height="14" fill="#ffffff"/><rect x="25" y="8" width="14" height="14" fill="#7b12f5"/><rect x="42" y="8" width="14" height="14" fill="#ffffff"/><rect x="8" y="25" width="14" height="14" fill="#7b12f5"/><rect x="25" y="25" width="14" height="14" fill="#7b12f5"/><rect x="42" y="25" width="14" height="14" fill="#7b12f5"/><rect x="8" y="42" width="14" height="14" fill="#ffffff"/><rect x="25" y="42" width="14" height="14" fill="#7b12f5"/><rect x="42" y="42" width="14" height="14" fill="#ffffff"/></svg>'
-  },
+/* ============================================================================
+   3. CATALOG OF 13 MINIGAMES & TOOLS
+   ============================================================================ */
+var APPS = [
+  // TAB 0: GAMES (Classic Minigames)
+  { id: 'snake', tab: 0, title: 'Snake', desc: 'Eat apples to grow', badge: 'GamePad D-Pad', icon: 'snake' },
+  { id: 'minesweeper', tab: 0, title: 'MineSweeper', desc: 'Don\'t touch a mine.', badge: 'Stylus Ready', icon: 'mine' },
+  { id: 'pong', tab: 0, title: 'Pong', desc: '1P vs CPU or 2P Local paddle action', badge: '60 FPS', icon: 'pong' },
+  { id: 'ttt', tab: 0, title: 'Tic-Tac-Toe', desc: 'Beat the smart AI or play 2-Player', badge: 'Touch + D-Pad', icon: 'ttt' },
+  { id: 'picross', tab: 0, title: 'Picross', desc: '5x5 and 10x10 logic nonogram puzzles', badge: 'Stylus Logic', icon: 'picross' },
 
-  // --- TAB: GAME & WATCH (5 Classic LCD Minigames) ---
-  {
-    id: 'gw-ball',
-    tab: 'gw',
-    title: 'Ball (Game & Watch)',
-    desc: 'Juggle 3 LCD balls without dropping a single one!',
-    badges: [{ text: 'LCD 1980', cls: 'gw' }, { text: 'GamePad Ready', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#c5ccb8"/><circle cx="16" cy="20" r="5" fill="#222922"/><circle cx="32" cy="12" r="5" fill="#222922"/><circle cx="48" cy="20" r="5" fill="#222922"/><circle cx="32" cy="36" r="7" fill="#222922"/><path d="M16,44 L26,44 L26,52 M48,44 L38,44 L38,52" stroke="#222922" stroke-width="4" fill="none"/></svg>'
-  },
-  {
-    id: 'gw-fire',
-    tab: 'gw',
-    title: 'Fire (Game & Watch)',
-    desc: 'Bounce falling victims from the burning building to the ambulance.',
-    badges: [{ text: 'LCD 1980', cls: 'gw' }, { text: 'GamePad Ready', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#c5ccb8"/><rect x="4" y="10" width="14" height="44" fill="#222922"/><polygon points="18,16 28,10 24,24" fill="#850800"/><circle cx="34" cy="24" r="5" fill="#222922"/><rect x="20" y="48" width="28" height="5" fill="#222922"/></svg>'
-  },
-  {
-    id: 'gw-helmet',
-    tab: 'gw',
-    title: 'Helmet / Manhole (G&W)',
-    desc: 'Dodge falling tools & hold manhole covers to score!',
-    badges: [{ text: 'LCD 1981', cls: 'gw' }, { text: 'Dual Mode', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#c5ccb8"/><path d="M14,36 A18,18 0 0,1 50,36 Z" fill="#222922"/><rect x="10" y="36" width="44" height="5" fill="#222922"/><rect x="26" y="10" width="12" height="6" fill="#850800"/></svg>'
-  },
-  {
-    id: 'gw-chef',
-    tab: 'gw',
-    title: 'Chef (Game & Watch)',
-    desc: 'Flip falling sausages and pancakes with your frying pan!',
-    badges: [{ text: 'LCD 1981', cls: 'gw' }, { text: 'GamePad Ready', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#c5ccb8"/><rect x="22" y="10" width="20" height="6" rx="3" fill="#222922"/><rect x="14" y="38" width="26" height="5" fill="#222922"/><rect x="40" y="36" width="14" height="3" fill="#222922"/></svg>'
-  },
-  {
-    id: 'gw-octopus',
-    tab: 'gw',
-    title: 'Octopus (Game & Watch)',
-    desc: 'Dive for sunken treasure while dodging giant tentacles.',
-    badges: [{ text: 'LCD 1981', cls: 'gw' }, { text: 'GamePad Ready', cls: '' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#c5ccb8"/><ellipse cx="32" cy="22" rx="16" ry="12" fill="#222922"/><circle cx="26" cy="22" r="2.5" fill="#c5ccb8"/><circle cx="38" cy="22" r="2.5" fill="#c5ccb8"/><path d="M18,32 L12,52 M27,34 L24,54 M37,34 L40,54 M46,32 L52,52" stroke="#222922" stroke-width="4"/></svg>'
-  },
+  // TAB 1: GAME & WATCH (5 LCD Classics)
+  { id: 'gw_ball', tab: 1, title: 'G&W: Ball', desc: 'Juggle 3 balls without dropping them', badge: 'LCD Classic', icon: 'gw' },
+  { id: 'gw_fire', tab: 1, title: 'G&W: Fire', desc: 'Bounce falling jumpers into the ambulance', badge: 'LCD Classic', icon: 'gw' },
+  { id: 'gw_helmet', tab: 1, title: 'G&W: Helmet', desc: 'Dodge falling tools between doors', badge: 'LCD Classic', icon: 'gw' },
+  { id: 'gw_chef', tab: 1, title: 'G&W: Chef', desc: 'Flip sausages and pancakes in the kitchen', badge: 'LCD Classic', icon: 'gw' },
+  { id: 'gw_octopus', tab: 1, title: 'G&W: Octopus', desc: 'Grab sunken gold & dodge tentacles', badge: 'LCD Classic', icon: 'gw' },
 
-  // --- TAB: TOOLS (3 Utilities) ---
-  {
-    id: 'paint',
-    tab: 'tools',
-    title: 'Paint Tool',
-    desc: 'Canvas sketchpad with color swatches, brush sizes, and stylus support.',
-    badges: [{ text: 'Touch Stylus', cls: 'tool' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#ffffff"/><circle cx="20" cy="20" r="7" fill="#ff2a2a"/><circle cx="42" cy="18" r="7" fill="#2a7fff"/><circle cx="18" cy="42" r="7" fill="#2aff55"/><polygon points="34,48 54,28 58,32 38,52" fill="#850800"/></svg>'
-  },
-  {
-    id: 'calculator',
-    tab: 'tools',
-    title: 'Calculator',
-    desc: 'Quick arithmetic (+, -, ×, ÷, %, √) with large touch keys.',
-    badges: [{ text: 'Utility', cls: 'tool' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#292346"/><rect x="10" y="8" width="44" height="14" fill="#c5ccb8"/><rect x="10" y="28" width="12" height="12" fill="#7b12f5"/><rect x="26" y="28" width="12" height="12" fill="#7b12f5"/><rect x="42" y="28" width="12" height="12" fill="#850800"/><rect x="10" y="44" width="12" height="12" fill="#7b12f5"/><rect x="26" y="44" width="12" height="12" fill="#7b12f5"/><rect x="42" y="44" width="12" height="12" fill="#850800"/></svg>'
-  },
-  {
-    id: 'timer',
-    tab: 'tools',
-    title: 'Timer & Stopwatch',
-    desc: 'Precision stopwatch with laps and countdown timer with visual alarm.',
-    badges: [{ text: 'Utility', cls: 'tool' }],
-    icon: '<svg viewBox="0 0 64 64" width="68" height="68"><rect width="64" height="64" fill="#191233"/><circle cx="32" cy="35" r="21" stroke="#ffffff" stroke-width="4" fill="#633483"/><rect x="26" y="6" width="12" height="5" fill="#ffffff"/><line x1="32" y1="35" x2="32" y2="21" stroke="#ffffff" stroke-width="4"/><line x1="32" y1="35" x2="44" y2="35" stroke="#ff5544" stroke-width="4"/></svg>'
-  }
+  // TAB 2: OTHER (Utilities & Tools)
+  { id: 'paint', tab: 2, title: 'Paint Tool', desc: 'Draw with the Wii U GamePad stylus', badge: 'Touch Canvas', icon: 'paint' },
+  { id: 'calc', tab: 2, title: 'Calculator', desc: 'Big button arithmetic & square roots', badge: 'Utility', icon: 'calc' },
+  { id: 'timer', tab: 2, title: 'Timer & Stopwatch', desc: 'Stopwatch & countdown alarm alert', badge: 'Utility', icon: 'timer' }
 ];
 
-/* ===========================================================================
-   HUB STATE, TAB SWITCHING & MARIO EASTER EGG
-   =========================================================================== */
-var currentTab = 'games';
+var currentTab = 0;
 var selectedRowIndex = 0;
 var activeAppId = null;
 var activeLoop = null;
-var activeCleanup = null;
+var customInputHandler = null;
 
-function renderHubList() {
-  var listEl = document.getElementById('item-list');
-  listEl.innerHTML = '';
-
-  if (currentTab === 'about') {
-    listEl.innerHTML =
-      '<div style="padding:14px; line-height:1.5; font-size:15px;">' +
-        '<h3 style="color:#b37aff; margin-bottom:6px;">Wii U Web stuff — by Yauheni Larchanka</h3>' +
-        '<p style="margin-bottom:8px;">Built from the ground up in lightweight vanilla HTML5, CSS3, and JavaScript for the <strong>Nintendo Wii U NetFront NX</strong> browser (854×480 GamePad touch screen + D-Pad controls).</p>' +
-        '<p style="margin-bottom:8px;"><strong>Included Collection (13 Apps):</strong><br>' +
-        '• <strong>5 Classic Games:</strong> Snake, MineSweeper, Pong (1P/2P), Tic-Tac-Toe, and Picross.<br>' +
-        '• <strong>5 Game &amp; Watch LCD Classics:</strong> Ball, Fire, Helmet/Manhole, Chef, and Octopus.<br>' +
-        '• <strong>3 Wii U Utilities:</strong> Paint Sketchpad, Calculator, and Timer/Stopwatch.</p>' +
-        '<p style="color:#cccccc;">Tip: Click the 8-bit Mario sprite on the banner bezel for a retro 1-UP sound!</p>' +
-      '</div>';
-    return;
-  }
-
-  var items = [];
-  for (var i = 0; i < APP_CATALOG.length; i++) {
-    if (APP_CATALOG[i].tab === currentTab) items.push(APP_CATALOG[i]);
-  }
-
-  if (selectedRowIndex >= items.length) selectedRowIndex = 0;
-
-  for (var j = 0; j < items.length; j++) {
-    (function(app, idx) {
-      var row = document.createElement('div');
-      row.className = 'list-row' + (idx === selectedRowIndex ? ' selected-row' : '');
-
-      var badgesHtml = '';
-      for (var b = 0; b < app.badges.length; b++) {
-        badgesHtml += '<span class="badge-pill ' + app.badges[b].cls + '">' + app.badges[b].text + '</span>';
-      }
-
-      row.innerHTML =
-        '<div class="item-icon">' + app.icon + '</div>' +
-        '<div class="item-info">' +
-          '<div class="item-title">' + app.title + '</div>' +
-          '<div class="item-desc">' + app.desc + '</div>' +
-          '<div class="item-badges">' + badgesHtml + '</div>' +
-        '</div>';
-
-      row.addEventListener('click', function() {
-        SFX.gwTick();
-        openApp(app.id);
-      });
-      listEl.appendChild(row);
-    })(items[j], j);
+function drawAppIcon(canvas, type) {
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, 64, 64);
+  if (type === 'snake') {
+    ctx.fillStyle = '#7ed957';
+    ctx.fillRect(0, 0, 64, 64);
+    ctx.fillStyle = '#5ec239';
+    for (var y=0; y<4; y++) for (var x=0; x<4; x++) if ((x+y)%2===1) ctx.fillRect(x*16, y*16, 16, 16);
+    ctx.fillStyle = '#ff1616';
+    ctx.beginPath(); ctx.arc(20, 22, 9, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(30, 20, 24, 10);
+    ctx.fillRect(44, 20, 10, 34);
+  } else if (type === 'mine') {
+    ctx.fillStyle = '#433e66';
+    ctx.beginPath(); ctx.arc(32, 36, 18, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#433e66'; ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(32, 10); ctx.lineTo(32, 58);
+    ctx.moveTo(10, 36); ctx.lineTo(54, 36);
+    ctx.moveTo(16, 20); ctx.lineTo(48, 52);
+    ctx.moveTo(48, 20); ctx.lineTo(16, 52);
+    ctx.stroke();
+  } else if (type === 'pong') {
+    ctx.fillStyle = '#111'; ctx.fillRect(0,0,64,64);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(8, 14, 6, 24);
+    ctx.fillRect(50, 26, 6, 24);
+    ctx.fillRect(30, 30, 6, 6);
+  } else if (type === 'ttt') {
+    ctx.strokeStyle = '#222'; ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(22, 8); ctx.lineTo(22, 56);
+    ctx.moveTo(42, 8); ctx.lineTo(42, 56);
+    ctx.moveTo(8, 22); ctx.lineTo(56, 22);
+    ctx.moveTo(8, 42); ctx.lineTo(56, 42);
+    ctx.stroke();
+  } else if (type === 'picross') {
+    ctx.fillStyle = '#222';
+    ctx.fillRect(10, 10, 44, 44);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(14, 14, 16, 16);
+    ctx.fillRect(34, 34, 16, 16);
+  } else if (type === 'gw') {
+    ctx.fillStyle = '#9ead86'; ctx.fillRect(0,0,64,64);
+    ctx.strokeStyle = '#22251e'; ctx.lineWidth = 4;
+    ctx.strokeRect(4,4,56,56);
+    ctx.fillStyle = '#22251e';
+    ctx.beginPath(); ctx.arc(32, 22, 7, 0, Math.PI*2); ctx.fill();
+    ctx.fillRect(24, 31, 16, 18);
+  } else if (type === 'paint') {
+    var cols = ['#e52521','#fbd000','#4cd964','#007aff'];
+    for (var i=0;i<4;i++) { ctx.fillStyle = cols[i]; ctx.fillRect((i%2)*32, Math.floor(i/2)*32, 32, 32); }
+  } else if (type === 'calc') {
+    ctx.fillStyle = '#2b2927'; ctx.fillRect(8,8,48,48);
+    ctx.fillStyle = '#9ead86'; ctx.fillRect(14,14,36,12);
+    ctx.fillStyle = '#ff9500'; ctx.fillRect(14,32,14,16);
+    ctx.fillStyle = '#7b12f5'; ctx.fillRect(34,32,16,16);
+  } else if (type === 'timer') {
+    ctx.strokeStyle = '#850800'; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.arc(32, 34, 20, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(32, 34); ctx.lineTo(32, 20); ctx.lineTo(42, 34); ctx.stroke();
   }
 }
 
-function switchTab(tabName) {
-  currentTab = tabName;
-  selectedRowIndex = 0;
-  var btns = document.querySelectorAll('.tab-btn');
-  for (var i = 0; i < btns.length; i++) {
-    if (btns[i].getAttribute('data-tab') === tabName) {
-      btns[i].classList.add('active');
-    } else {
-      btns[i].classList.remove('active');
-    }
+function renderHubList() {
+  var container = document.getElementById('list-scroll');
+  container.innerHTML = '';
+  if (currentTab === 3) {
+    container.innerHTML =
+      '<div style="padding:18px; text-align:left; line-height:22px; font-size:15px;">' +
+      '<h2 style="color:#a37cf0; margin-bottom:8px;">Wii U Web stuff — by Yauheni Larchanka</h2>' +
+      '<p>Built specifically for the Nintendo Wii U NetFront NX browser (854x480 GamePad screen).</p>' +
+      '<p style="margin-top:8px;"><b>Supported Inputs:</b><br>' +
+      '• Native <b>window.wiiu.gamepad</b> API (D-Pad, Left Stick, A, B, L, R)<br>' +
+      '• GamePad Touch Screen &amp; Stylus<br>' +
+      '• Keyboard Arrows + Enter / Backspace on PC</p>' +
+      '</div>';
+    syncScrollbar();
+    return;
   }
-  SFX.gwTick();
+  var filtered = [];
+  for (var i = 0; i < APPS.length; i++) {
+    if (APPS[i].tab === currentTab) filtered.push(APPS[i]);
+  }
+  if (selectedRowIndex >= filtered.length) selectedRowIndex = 0;
+
+  for (var j = 0; j < filtered.length; j++) {
+    (function(app, idx) {
+      var row = document.createElement('div');
+      row.className = 'app-row' + (idx === selectedRowIndex ? ' focused' : '');
+      row.id = 'app-row-' + idx;
+      row.onclick = function() {
+        selectedRowIndex = idx;
+        launchApp(app.id);
+      };
+
+      var iconCanvas = document.createElement('canvas');
+      iconCanvas.width = 64;
+      iconCanvas.height = 64;
+      iconCanvas.className = 'app-icon';
+      drawAppIcon(iconCanvas, app.icon);
+
+      var info = document.createElement('div');
+      info.className = 'app-info';
+      info.innerHTML =
+        '<div class="app-title">' + app.title + '</div>' +
+        '<div class="app-desc">' + app.desc + '</div>' +
+        '<span class="app-badge">' + app.badge + '</span>';
+
+      row.appendChild(iconCanvas);
+      row.appendChild(info);
+      container.appendChild(row);
+    })(filtered[j], j);
+  }
+  syncScrollbar();
+}
+
+function switchTab(tabIdx) {
+  currentTab = tabIdx;
+  selectedRowIndex = 0;
+  var cells = document.getElementById('tabs-table').getElementsByTagName('td');
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].className = 'tab-cell' + (i === tabIdx ? ' active' : '');
+  }
+  document.getElementById('list-scroll').scrollTop = 0;
+  beep(520, 40);
   renderHubList();
 }
 
-// Tab buttons listener
-var tabBtns = document.querySelectorAll('.tab-btn');
-for (var tb = 0; tb < tabBtns.length; tb++) {
-  tabBtns[tb].addEventListener('click', function() {
-    switchTab(this.getAttribute('data-tab'));
-  });
+function moveHubSelection(delta) {
+  var filtered = [];
+  for (var i = 0; i < APPS.length; i++) if (APPS[i].tab === currentTab) filtered.push(APPS[i]);
+  if (!filtered.length) return;
+  selectedRowIndex += delta;
+  if (selectedRowIndex < 0) selectedRowIndex = 0;
+  if (selectedRowIndex >= filtered.length) selectedRowIndex = filtered.length - 1;
+
+  for (var j = 0; j < filtered.length; j++) {
+    var r = document.getElementById('app-row-' + j);
+    if (r) r.className = 'app-row' + (j === selectedRowIndex ? ' focused' : '');
+  }
+  var activeRow = document.getElementById('app-row-' + selectedRowIndex);
+  var scroller = document.getElementById('list-scroll');
+  if (activeRow && scroller) {
+    var top = activeRow.offsetTop;
+    if (top < scroller.scrollTop) scroller.scrollTop = top;
+    else if (top + 82 > scroller.scrollTop + scroller.clientHeight) {
+      scroller.scrollTop = top + 82 - scroller.clientHeight;
+    }
+  }
+  beep(400, 25);
+  syncScrollbar();
 }
 
-// Mario Easter Egg
-document.getElementById('mario-easter-egg').addEventListener('click', function() {
-  var m = this;
-  var b = document.getElementById('mario-bubble');
-  SFX.coin();
-  m.classList.add('hop');
-  b.style.display = 'block';
-  setTimeout(function() { m.classList.remove('hop'); }, 250);
-  setTimeout(function() { b.style.display = 'none'; }, 1600);
-});
+function activateSelectedHubApp() {
+  var filtered = [];
+  for (var i = 0; i < APPS.length; i++) if (APPS[i].tab === currentTab) filtered.push(APPS[i]);
+  if (filtered[selectedRowIndex]) {
+    launchApp(filtered[selectedRowIndex].id);
+  }
+}
 
-/* ===========================================================================
-   SUB-APP LAUNCHER & RETURN TO HUB
-   =========================================================================== */
-function stopCurrentApp() {
+function scrollList(px) {
+  var scroller = document.getElementById('list-scroll');
+  scroller.scrollTop += px;
+  syncScrollbar();
+}
+
+function trackJump(e) {
+  var track = document.getElementById('scroll-track');
+  var rect = track.getBoundingClientRect();
+  var clickY = (e.clientY || 0) - rect.top;
+  var ratio = clickY / 220;
+  var scroller = document.getElementById('list-scroll');
+  scroller.scrollTop = ratio * (scroller.scrollHeight - scroller.clientHeight);
+  syncScrollbar();
+}
+
+function syncScrollbar() {
+  var scroller = document.getElementById('list-scroll');
+  var thumb = document.getElementById('scroll-thumb');
+  if (!scroller || !thumb) return;
+  var maxScroll = scroller.scrollHeight - scroller.clientHeight;
+  if (maxScroll <= 0) {
+    thumb.style.top = '4px';
+    thumb.style.height = '210px';
+  } else {
+    thumb.style.height = '64px';
+    var ratio = scroller.scrollTop / maxScroll;
+    thumb.style.top = Math.round(4 + ratio * (220 - 72)) + 'px';
+  }
+}
+
+/* ============================================================================
+   4. NATIVE WII U GAMEPAD API (`window.wiiu.gamepad`) + KEYBOARD INPUT ENGINE
+   ============================================================================ */
+var prevHoldMask = 0;
+var stickCooldown = 0;
+
+/* Official Wii U Internet Browser `wiiu.gamepad.hold` Bitmasks */
+var WIIU_BTN = {
+  A:      0x00008000,
+  B:      0x00004000,
+  X:      0x00002000,
+  Y:      0x00001000,
+  LEFT:   0x00000800,
+  RIGHT:  0x00000400,
+  UP:     0x00000200,
+  DOWN:   0x00000100,
+  ZL:     0x00000080,
+  ZR:     0x00000040,
+  L:      0x00000020,
+  R:      0x00000010,
+  PLUS:   0x00000008,
+  MINUS:  0x00000004
+};
+
+function dispatchUnifiedCommand(cmd) {
+  if (!activeAppId) {
+    // Hub Navigation
+    if (cmd === 'UP') moveHubSelection(-1);
+    else if (cmd === 'DOWN') moveHubSelection(1);
+    else if (cmd === 'L') switchTab((currentTab + 3) % 4);
+    else if (cmd === 'R') switchTab((currentTab + 1) % 4);
+    else if (cmd === 'A') activateSelectedHubApp();
+  } else {
+    // Inside Sub-App
+    if (cmd === 'B') {
+      returnToHub();
+      return;
+    }
+    if (typeof customInputHandler === 'function') {
+      customInputHandler(cmd);
+    }
+  }
+}
+
+// Poll `window.wiiu.gamepad.update()` 30 times per second
+setInterval(function() {
+  if (window.wiiu && window.wiiu.gamepad) {
+    try {
+      var gp = window.wiiu.gamepad.update();
+      if (gp && gp.isEnabled && gp.isDataValid) {
+        var hold = gp.hold || 0;
+        var justPressed = hold & (~prevHoldMask);
+
+        if (justPressed & WIIU_BTN.UP)    dispatchUnifiedCommand('UP');
+        if (justPressed & WIIU_BTN.DOWN)  dispatchUnifiedCommand('DOWN');
+        if (justPressed & WIIU_BTN.LEFT)  dispatchUnifiedCommand('LEFT');
+        if (justPressed & WIIU_BTN.RIGHT) dispatchUnifiedCommand('RIGHT');
+        if (justPressed & (WIIU_BTN.A | WIIU_BTN.PLUS)) dispatchUnifiedCommand('A');
+        if (justPressed & (WIIU_BTN.B | WIIU_BTN.MINUS)) dispatchUnifiedCommand('B');
+        if (justPressed & (WIIU_BTN.X | WIIU_BTN.Y)) dispatchUnifiedCommand('X');
+        if (justPressed & (WIIU_BTN.L | WIIU_BTN.ZL)) dispatchUnifiedCommand('L');
+        if (justPressed & (WIIU_BTN.R | WIIU_BTN.ZR)) dispatchUnifiedCommand('R');
+
+        // Left Analog Stick Support
+        if (stickCooldown > 0) stickCooldown--;
+        if (stickCooldown === 0) {
+          if (gp.lStickY > 0.55)       { dispatchUnifiedCommand('UP'); stickCooldown = 6; }
+          else if (gp.lStickY < -0.55) { dispatchUnifiedCommand('DOWN'); stickCooldown = 6; }
+          else if (gp.lStickX < -0.55) { dispatchUnifiedCommand('LEFT'); stickCooldown = 6; }
+          else if (gp.lStickX > 0.55)  { dispatchUnifiedCommand('RIGHT'); stickCooldown = 6; }
+        }
+        prevHoldMask = hold;
+      }
+    } catch (e) {}
+  }
+}, 33);
+
+// Legacy keyCode Listener (Wii U Browser sends keyCode 37-40 & 13, plus Desktop testing)
+window.addEventListener('keydown', function(e) {
+  var code = e.keyCode || e.which;
+  if (code === 38 || code === 87) { e.preventDefault(); dispatchUnifiedCommand('UP'); }
+  else if (code === 40 || code === 83) { e.preventDefault(); dispatchUnifiedCommand('DOWN'); }
+  else if (code === 37 || code === 65) { e.preventDefault(); dispatchUnifiedCommand('LEFT'); }
+  else if (code === 39 || code === 68) { e.preventDefault(); dispatchUnifiedCommand('RIGHT'); }
+  else if (code === 13 || code === 32) { e.preventDefault(); dispatchUnifiedCommand('A'); }
+  else if (code === 8 || code === 27)  { e.preventDefault(); dispatchUnifiedCommand('B'); }
+  else if (code === 81) { e.preventDefault(); dispatchUnifiedCommand('L'); }
+  else if (code === 69) { e.preventDefault(); dispatchUnifiedCommand('R'); }
+  else if (code === 88 || code === 70) { e.preventDefault(); dispatchUnifiedCommand('X'); }
+}, false);
+
+/* ============================================================================
+   5. APP LAUNCHER & RETURN TO HUB
+   ============================================================================ */
+function clearActiveLoops() {
   if (activeLoop) {
     clearInterval(activeLoop);
-    cancelAnimationFrame(activeLoop);
     activeLoop = null;
   }
-  if (activeCleanup) {
-    activeCleanup();
-    activeCleanup = null;
-  }
+  customInputHandler = null;
 }
 
-function returnToHub() {
-  stopCurrentApp();
-  activeAppId = null;
-  document.getElementById('app-view').style.display = 'none';
-  document.getElementById('hub-view').style.display = 'block';
-  SFX.gwTick();
-}
-
-function openApp(appId) {
-  stopCurrentApp();
+function launchApp(appId) {
+  clearActiveLoops();
   activeAppId = appId;
-  var appMeta = null;
-  for (var i = 0; i < APP_CATALOG.length; i++) {
-    if (APP_CATALOG[i].id === appId) appMeta = APP_CATALOG[i];
-  }
+  var appObj = null;
+  for (var i = 0; i < APPS.length; i++) if (APPS[i].id === appId) appObj = APPS[i];
+
   document.getElementById('hub-view').style.display = 'none';
   document.getElementById('app-view').style.display = 'block';
-  document.getElementById('app-title-bar').textContent = appMeta ? appMeta.title : appId;
-
+  document.getElementById('app-header-title').innerHTML = appObj ? appObj.title : 'App';
   var stage = document.getElementById('app-stage');
   stage.innerHTML = '';
+  beep(660, 50);
 
   if (appId === 'snake') initSnake(stage);
   else if (appId === 'minesweeper') initMinesweeper(stage);
   else if (appId === 'pong') initPong(stage);
-  else if (appId === 'tictactoe') initTicTacToe(stage);
+  else if (appId === 'ttt') initTicTacToe(stage);
   else if (appId === 'picross') initPicross(stage);
-  else if (appId.indexOf('gw-') === 0) initGameAndWatch(stage, appId);
+  else if (appId.indexOf('gw_') === 0) initGameAndWatch(stage, appId);
   else if (appId === 'paint') initPaint(stage);
-  else if (appId === 'calculator') initCalculator(stage);
+  else if (appId === 'calc') initCalculator(stage);
   else if (appId === 'timer') initTimer(stage);
 }
 
-document.getElementById('btn-return-hub').addEventListener('click', returnToHub);
+function returnToHub() {
+  clearActiveLoops();
+  activeAppId = null;
+  document.getElementById('app-view').style.display = 'none';
+  document.getElementById('hub-view').style.display = 'block';
+  beep(330, 50);
+  renderHubList();
+}
 
-document.getElementById('btn-sound-toggle').addEventListener('click', function() {
-  SFX.enabled = !SFX.enabled;
-  this.textContent = 'SFX: ' + (SFX.enabled ? 'ON' : 'OFF');
-  if (SFX.enabled) SFX.coin();
-});
+function makeDpadHTML() {
+  return '<table class="dpad-table">' +
+    '<tr><td></td><td class="dpad-btn" onclick="dispatchUnifiedCommand(\'UP\')">&#9650;</td><td></td></tr>' +
+    '<tr><td class="dpad-btn" onclick="dispatchUnifiedCommand(\'LEFT\')">&#9664;</td>' +
+    '<td class="dpad-btn" onclick="dispatchUnifiedCommand(\'A\')">A</td>' +
+    '<td class="dpad-btn" onclick="dispatchUnifiedCommand(\'RIGHT\')">&#9654;</td></tr>' +
+    '<tr><td></td><td class="dpad-btn" onclick="dispatchUnifiedCommand(\'DOWN\')">&#9660;</td><td></td></tr>' +
+    '</table>';
+}
 
-document.getElementById('btn-app-reset').addEventListener('click', function() {
-  if (activeAppId) {
-    SFX.gwTick();
-    openApp(activeAppId);
-  }
-});
+/* ============================================================================
+   6. CLASSIC MINIGAMES (ALL FITTED TO 854x438 STAGE)
+   ============================================================================ */
 
-/* ===========================================================================
-   1. SNAKE (Canvas + On-Screen Wii U GamePad D-Pad)
-   =========================================================================== */
+/* --- A1. SNAKE --- */
 function initSnake(stage) {
   stage.innerHTML =
-    '<div class="toolbar-row">' +
-      '<div class="status-pill" id="snake-score">Apples: 0 | Best: 0</div>' +
-      '<button class="flat-btn green" id="snake-pause">Pause</button>' +
-    '</div>' +
-    '<div style="display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;">' +
-      '<canvas id="snake-canvas" width="320" height="320" style="background:#76c442; border:3px solid #2b2927;"></canvas>' +
-      '<div class="dpad-pad">' +
-        '<div></div><button class="dpad-btn" data-dir="U">&#9650;</button><div></div>' +
-        '<button class="dpad-btn" data-dir="L">&#9664;</button><div style="background:#191233;border-radius:6px;"></div><button class="dpad-btn" data-dir="R">&#9654;</button>' +
-        '<div></div><button class="dpad-btn" data-dir="D">&#9660;</button><div></div>' +
-      '</div>' +
-    '</div>';
+    '<table class="game-layout-table"><tr>' +
+    '<td><canvas id="snake-cv" class="game-canvas" width="400" height="380"></canvas></td>' +
+    '<td style="width:240px; text-align:center;">' +
+      '<div id="snake-score" style="font-size:20px; font-weight:bold; margin-bottom:10px;">Score: 0</div>' +
+      makeDpadHTML() +
+      '<div style="margin-top:12px;"><button class="flat-btn" onclick="launchApp(\'snake\')">Restart (A)</button></div>' +
+    '</td></tr></table>';
 
-  var canvas = document.getElementById('snake-canvas');
-  var ctx = canvas.getContext('2d');
-  var gridSize = 16;
-  var tiles = 20;
-  var snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
-  var dir = {x: 1, y: 0};
-  var nextDir = {x: 1, y: 0};
-  var apple = {x: 5, y: 5};
-  var score = 0;
-  var bestScore = 0;
-  var paused = false;
-  var gameOver = false;
+  var cv = document.getElementById('snake-cv');
+  var ctx = cv.getContext('2d');
+  var cols = 20, rows = 19, sz = 20;
+  var snake = [{x:10,y:9},{x:9,y:9},{x:8,y:9}];
+  var dir = {x:1,y:0}, nextDir = {x:1,y:0};
+  var apple = {x:15,y:9};
+  var score = 0, dead = false;
 
   function placeApple() {
-    while (true) {
-      var ax = Math.floor(Math.random() * tiles);
-      var ay = Math.floor(Math.random() * tiles);
-      var clash = false;
-      for (var i = 0; i < snake.length; i++) {
-        if (snake[i].x === ax && snake[i].y === ay) { clash = true; break; }
-      }
-      if (!clash) { apple = {x: ax, y: ay}; break; }
-    }
+    apple.x = Math.floor(Math.random()*cols);
+    apple.y = Math.floor(Math.random()*rows);
   }
 
-  function setDir(code) {
-    if (gameOver) {
-      snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
-      dir = {x: 1, y: 0};
-      nextDir = {x: 1, y: 0};
-      score = 0;
-      gameOver = false;
-      placeApple();
-      return;
-    }
-    if (code === 'U' && dir.y === 0) nextDir = {x: 0, y: -1};
-    if (code === 'D' && dir.y === 0) nextDir = {x: 0, y: 1};
-    if (code === 'L' && dir.x === 0) nextDir = {x: -1, y: 0};
-    if (code === 'R' && dir.x === 0) nextDir = {x: 1, y: 0};
-  }
-
-  var dbtns = stage.querySelectorAll('.dpad-btn');
-  for (var i = 0; i < dbtns.length; i++) {
-    dbtns[i].addEventListener('touchstart', function(e) { e.preventDefault(); setDir(this.getAttribute('data-dir')); });
-    dbtns[i].addEventListener('mousedown', function() { setDir(this.getAttribute('data-dir')); });
-  }
-
-  document.getElementById('snake-pause').addEventListener('click', function() {
-    paused = !paused;
-    this.textContent = paused ? 'Resume' : 'Pause';
-  });
-
-  function onKey(e) {
-    if (e.key === 'ArrowUp' || e.key === 'w') { e.preventDefault(); setDir('U'); }
-    if (e.key === 'ArrowDown' || e.key === 's') { e.preventDefault(); setDir('D'); }
-    if (e.key === 'ArrowLeft' || e.key === 'a') { e.preventDefault(); setDir('L'); }
-    if (e.key === 'ArrowRight' || e.key === 'd') { e.preventDefault(); setDir('R'); }
-  }
-  window.addEventListener('keydown', onKey);
-  activeCleanup = function() { window.removeEventListener('keydown', onKey); };
-
-  function step() {
-    if (paused) return;
-    if (!gameOver) {
-      dir = nextDir;
-      var head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
-      if (head.x < 0 || head.x >= tiles || head.y < 0 || head.y >= tiles) {
-        gameOver = true;
-        SFX.gwMiss();
-      } else {
-        for (var i = 0; i < snake.length; i++) {
-          if (snake[i].x === head.x && snake[i].y === head.y) {
-            gameOver = true;
-            SFX.gwMiss();
-            break;
-          }
-        }
-      }
-      if (!gameOver) {
-        snake.unshift(head);
-        if (head.x === apple.x && head.y === apple.y) {
-          score++;
-          if (score > bestScore) bestScore = score;
-          SFX.gwCatch();
-          placeApple();
-        } else {
-          snake.pop();
-        }
-      }
-      document.getElementById('snake-score').textContent = 'Apples: ' + score + ' | Best: ' + bestScore;
-    }
-
-    // Draw flat checkerboard like icon
-    for (var r = 0; r < tiles; r++) {
-      for (var c = 0; c < tiles; c++) {
-        ctx.fillStyle = ((r + c) % 2 === 0) ? '#76c442' : '#63b030';
-        ctx.fillRect(c * gridSize, r * gridSize, gridSize, gridSize);
-      }
-    }
-    // Draw Apple
-    ctx.fillStyle = '#ff1a1a';
-    ctx.beginPath();
-    ctx.arc(apple.x * gridSize + 8, apple.y * gridSize + 8, 7, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Draw Snake
-    for (var s = 0; s < snake.length; s++) {
-      ctx.fillStyle = (s === 0) ? '#ffffff' : '#f0f0f0';
-      ctx.fillRect(snake[s].x * gridSize + 1, snake[s].y * gridSize + 1, gridSize - 2, gridSize - 2);
-    }
-
-    if (gameOver) {
-      ctx.fillStyle = '#191233';
-      ctx.fillRect(40, 120, 240, 80);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 20px Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText('GAME OVER!', 160, 152);
-      ctx.font = '14px Arial';
-      ctx.fillText('Tap D-Pad or Reset to play again', 160, 180);
-    }
-  }
-
-  step();
-  activeLoop = setInterval(step, 135);
-}
-
-/* ===========================================================================
-   2. MINESWEEPER (Easy 8x8 & Medium 12x10 + Stylus Dig/Flag Toggle)
-   =========================================================================== */
-function initMinesweeper(stage) {
-  var rows = 8, cols = 8, totalMines = 10;
-  var flagMode = false;
-  var board = [];
-  var gameOver = false;
-  var cellsRevealed = 0;
-
-  stage.innerHTML =
-    '<div class="toolbar-row">' +
-      '<button class="flat-btn active" id="ms-easy">Easy (8x8)</button>' +
-      '<button class="flat-btn" id="ms-med">Medium (12x10)</button>' +
-      '<button class="flat-btn green" id="ms-mode">Mode: DIG &#9935;</button>' +
-      '<div class="status-pill" id="ms-status">Mines: 10</div>' +
-    '</div>' +
-    '<div id="ms-grid" class="mine-board"></div>';
-
-  var gridEl = document.getElementById('ms-grid');
-  var statusEl = document.getElementById('ms-status');
-  var modeBtn = document.getElementById('ms-mode');
-
-  modeBtn.addEventListener('click', function() {
-    flagMode = !flagMode;
-    this.textContent = flagMode ? 'Mode: FLAG \uD83D\uDEA9' : 'Mode: DIG \u26CF';
-    this.className = flagMode ? 'flat-btn red' : 'flat-btn green';
-    SFX.gwTick();
-  });
-
-  document.getElementById('ms-easy').addEventListener('click', function() {
-    rows = 8; cols = 8; totalMines = 10; buildBoard();
-  });
-  document.getElementById('ms-med').addEventListener('click', function() {
-    rows = 10; cols = 12; totalMines = 18; buildBoard();
-  });
-
-  function buildBoard() {
-    gameOver = false;
-    cellsRevealed = 0;
-    board = [];
-    gridEl.style.gridTemplateColumns = 'repeat(' + cols + ', 32px)';
-    gridEl.innerHTML = '';
-    statusEl.textContent = 'Mines: ' + totalMines;
-
-    for (var r = 0; r < rows; r++) {
-      board[r] = [];
-      for (var c = 0; c < cols; c++) {
-        board[r][c] = { mine: false, rev: false, flag: false, count: 0, el: null };
-      }
-    }
-
-    var placed = 0;
-    while (placed < totalMines) {
-      var mr = Math.floor(Math.random() * rows);
-      var mc = Math.floor(Math.random() * cols);
-      if (!board[mr][mc].mine) {
-        board[mr][mc].mine = true;
-        placed++;
-      }
-    }
-
-    for (var r2 = 0; r2 < rows; r2++) {
-      for (var c2 = 0; c2 < cols; c2++) {
-        var cnt = 0;
-        for (var dr = -1; dr <= 1; dr++) {
-          for (var dc = -1; dc <= 1; dc++) {
-            var nr = r2 + dr, nc = c2 + dc;
-            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && board[nr][nc].mine) cnt++;
-          }
-        }
-        board[r2][c2].count = cnt;
-
-        var btn = document.createElement('button');
-        btn.className = 'mine-cell';
-        (function(rr, cc) {
-          btn.addEventListener('click', function() { handleCellClick(rr, cc); });
-          btn.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            toggleFlag(rr, cc);
-          });
-        })(r2, c2);
-        board[r2][c2].el = btn;
-        gridEl.appendChild(btn);
-      }
-    }
-  }
-
-  function toggleFlag(r, c) {
-    if (gameOver || board[r][c].rev) return;
-    board[r][c].flag = !board[r][c].flag;
-    board[r][c].el.textContent = board[r][c].flag ? '\uD83D\uDEA9' : '';
-    SFX.gwTick();
-  }
-
-  function reveal(r, c) {
-    if (r < 0 || r >= rows || c < 0 || c >= cols) return;
-    var cell = board[r][c];
-    if (cell.rev || cell.flag) return;
-    cell.rev = true;
-    cell.el.classList.add('revealed');
-    cellsRevealed++;
-
-    if (cell.count > 0) {
-      var colors = ['', '#5dade2', '#58d68d', '#f1948a', '#bb8fce', '#f7dc6f', '#48c9b0', '#ffffff', '#cccccc'];
-      cell.el.style.color = colors[cell.count];
-      cell.el.textContent = cell.count;
-    } else {
-      for (var dr = -1; dr <= 1; dr++) {
-        for (var dc = -1; dc <= 1; dc++) {
-          reveal(r + dr, c + dc);
-        }
-      }
-    }
-  }
-
-  function handleCellClick(r, c) {
-    if (gameOver) return;
-    if (flagMode) {
-      toggleFlag(r, c);
-      return;
-    }
-    var cell = board[r][c];
-    if (cell.flag || cell.rev) return;
-
-    if (cell.mine) {
-      gameOver = true;
-      cell.el.classList.add('exploded');
-      cell.el.textContent = '\uD83D\uDCA3';
-      for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < cols; j++) {
-          if (board[i][j].mine) board[i][j].el.textContent = '\uD83D\uDCA3';
-        }
-      }
-      statusEl.textContent = 'BOOM! Game Over';
-      SFX.gwMiss();
-      return;
-    }
-
-    SFX.gwTick();
-    reveal(r, c);
-    if (cellsRevealed === rows * cols - totalMines) {
-      gameOver = true;
-      statusEl.textContent = 'YOU CLEARED ALL MINES!';
-      SFX.win();
-    }
-  }
-
-  buildBoard();
-}
-
-/* ===========================================================================
-   3. PONG (1P vs CPU or 2P Local + Touch Buttons & Drag)
-   =========================================================================== */
-function initPong(stage) {
-  var twoPlayer = false;
-  stage.innerHTML =
-    '<div class="toolbar-row">' +
-      '<button class="flat-btn green" id="pong-mode">Mode: 1P vs CPU</button>' +
-      '<div class="status-pill" id="pong-score">P1: 0 — 0 :CPU (First to 7)</div>' +
-    '</div>' +
-    '<div style="display:flex; align-items:center; gap:10px;">' +
-      '<div style="display:flex; flex-direction:column; gap:10px;">' +
-        '<button class="dpad-btn" style="width:54px;height:68px;" id="p1-up">P1 &#9650;</button>' +
-        '<button class="dpad-btn" style="width:54px;height:68px;" id="p1-dn">P1 &#9660;</button>' +
-      '</div>' +
-      '<canvas id="pong-canvas" width="520" height="310" style="background:#0f0a21; border:3px solid #633483;"></canvas>' +
-      '<div style="display:flex; flex-direction:column; gap:10px;">' +
-        '<button class="dpad-btn" style="width:54px;height:68px;" id="p2-up">P2 &#9650;</button>' +
-        '<button class="dpad-btn" style="width:54px;height:68px;" id="p2-dn">P2 &#9660;</button>' +
-      '</div>' +
-    '</div>';
-
-  var canvas = document.getElementById('pong-canvas');
-  var ctx = canvas.getContext('2d');
-  var p1 = { y: 120, score: 0, vy: 0 };
-  var p2 = { y: 120, score: 0, vy: 0 };
-  var ball = { x: 260, y: 155, vx: 4.5, vy: 3 };
-  var pH = 64, pW = 10;
-  var winner = null;
-
-  function resetBall(dir) {
-    ball.x = 260; ball.y = 155;
-    ball.vx = (dir || 1) * 4.5;
-    ball.vy = (Math.random() * 4 - 2);
-  }
-
-  document.getElementById('pong-mode').addEventListener('click', function() {
-    twoPlayer = !twoPlayer;
-    p1.score = 0; p2.score = 0; winner = null;
-    this.textContent = twoPlayer ? 'Mode: 2-Player Local' : 'Mode: 1P vs CPU';
-    resetBall(1);
-    SFX.gwTick();
-  });
-
-  function bindHold(btnId, player, vel) {
-    var b = document.getElementById(btnId);
-    var start = function(e) { e.preventDefault(); player.vy = vel; };
-    var end = function(e) { e.preventDefault(); player.vy = 0; };
-    b.addEventListener('touchstart', start);
-    b.addEventListener('touchend', end);
-    b.addEventListener('mousedown', start);
-    b.addEventListener('mouseup', end);
-    b.addEventListener('mouseleave', end);
-  }
-  bindHold('p1-up', p1, -6);
-  bindHold('p1-dn', p1, 6);
-  bindHold('p2-up', p2, -6);
-  bindHold('p2-dn', p2, 6);
-
-  // Touch drag directly on canvas
-  canvas.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-    var rect = canvas.getBoundingClientRect();
-    for (var i = 0; i < e.touches.length; i++) {
-      var tx = e.touches[i].clientX - rect.left;
-      var ty = e.touches[i].clientY - rect.top;
-      if (tx < 260) p1.y = Math.max(0, Math.min(310 - pH, ty - pH / 2));
-      else if (twoPlayer) p2.y = Math.max(0, Math.min(310 - pH, ty - pH / 2));
-    }
-  });
-
-  function onKeyDown(e) {
-    if (e.key === 'w' || e.key === 'W') p1.vy = -6;
-    if (e.key === 's' || e.key === 'S') p1.vy = 6;
-    if (e.key === 'ArrowUp') { e.preventDefault(); if (twoPlayer) p2.vy = -6; else p1.vy = -6; }
-    if (e.key === 'ArrowDown') { e.preventDefault(); if (twoPlayer) p2.vy = 6; else p1.vy = 6; }
-  }
-  function onKeyUp(e) {
-    if (e.key === 'w' || e.key === 'W' || e.key === 's' || e.key === 'S') p1.vy = 0;
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { p1.vy = 0; p2.vy = 0; }
-  }
-  window.addEventListener('keydown', onKeyDown);
-  window.addEventListener('keyup', onKeyUp);
-  activeCleanup = function() {
-    window.removeEventListener('keydown', onKeyDown);
-    window.removeEventListener('keyup', onKeyUp);
+  customInputHandler = function(cmd) {
+    if (cmd === 'UP' && dir.y === 0) nextDir = {x:0,y:-1};
+    else if (cmd === 'DOWN' && dir.y === 0) nextDir = {x:0,y:1};
+    else if (cmd === 'LEFT' && dir.x === 0) nextDir = {x:-1,y:0};
+    else if (cmd === 'RIGHT' && dir.x === 0) nextDir = {x:1,y:0};
+    else if (cmd === 'A' && dead) launchApp('snake');
   };
 
-  function update() {
-    if (!winner) {
-      p1.y = Math.max(0, Math.min(310 - pH, p1.y + p1.vy));
-      if (twoPlayer) {
-        p2.y = Math.max(0, Math.min(310 - pH, p2.y + p2.vy));
+  activeLoop = setInterval(function() {
+    if (dead) return;
+    dir = nextDir;
+    var head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+    if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) { dead = true; beep(150, 200); }
+    for (var i=0; i<snake.length; i++) {
+      if (snake[i].x === head.x && snake[i].y === head.y) { dead = true; beep(150, 200); }
+    }
+    if (!dead) {
+      snake.unshift(head);
+      if (head.x === apple.x && head.y === apple.y) {
+        score += 10;
+        document.getElementById('snake-score').innerHTML = 'Score: ' + score;
+        beep(700, 50);
+        placeApple();
       } else {
-        var target = ball.y - pH / 2;
-        if (p2.y + 6 < target) p2.y += 3.6;
-        else if (p2.y - 6 > target) p2.y -= 3.6;
-        p2.y = Math.max(0, Math.min(310 - pH, p2.y));
+        snake.pop();
       }
-
-      ball.x += ball.vx;
-      ball.y += ball.vy;
-
-      if (ball.y < 6 || ball.y > 304) {
-        ball.vy = -ball.vy;
-        SFX.gwTick();
-      }
-
-      // Left paddle
-      if (ball.x <= 24 && ball.x >= 12 && ball.y >= p1.y && ball.y <= p1.y + pH) {
-        ball.vx = Math.abs(ball.vx) * 1.04;
-        ball.vy = ((ball.y - (p1.y + pH / 2)) / (pH / 2)) * 5;
-        SFX.gwCatch();
-      }
-      // Right paddle
-      if (ball.x >= 496 && ball.x <= 508 && ball.y >= p2.y && ball.y <= p2.y + pH) {
-        ball.vx = -Math.abs(ball.vx) * 1.04;
-        ball.vy = ((ball.y - (p2.y + pH / 2)) / (pH / 2)) * 5;
-        SFX.gwCatch();
-      }
-
-      if (ball.x < 0) {
-        p2.score++;
-        SFX.gwMiss();
-        if (p2.score >= 7) winner = twoPlayer ? 'PLAYER 2 WINS!' : 'CPU WINS!';
-        resetBall(1);
-      } else if (ball.x > 520) {
-        p1.score++;
-        SFX.coin();
-        if (p1.score >= 7) winner = 'PLAYER 1 WINS!';
-        resetBall(-1);
-      }
-
-      document.getElementById('pong-score').textContent =
-        'P1: ' + p1.score + ' — ' + p2.score + ' :' + (twoPlayer ? 'P2' : 'CPU') + ' (First to 7)';
     }
-
-    ctx.fillStyle = '#0f0a21';
-    ctx.fillRect(0, 0, 520, 310);
-
-    ctx.fillStyle = '#362d59';
-    for (var y = 6; y < 310; y += 20) ctx.fillRect(258, y, 4, 12);
-
+    ctx.fillStyle = '#7ed957';
+    ctx.fillRect(0,0,400,380);
+    ctx.fillStyle = '#ff1616';
+    ctx.fillRect(apple.x*sz+2, apple.y*sz+2, sz-4, sz-4);
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(14, p1.y, pW, pH);
-    ctx.fillRect(496, p2.y, pW, pH);
-
-    ctx.fillStyle = '#7b12f5';
-    ctx.fillRect(ball.x - 6, ball.y - 6, 12, 12);
-
-    if (winner) {
-      ctx.fillStyle = '#850800';
-      ctx.fillRect(120, 115, 280, 75);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 22px Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText(winner, 260, 158);
+    for (var j=0; j<snake.length; j++) {
+      ctx.fillRect(snake[j].x*sz+1, snake[j].y*sz+1, sz-2, sz-2);
     }
-  }
-
-  activeLoop = setInterval(update, 1000 / 60);
+    if (dead) {
+      ctx.fillStyle = 'rgba(0,0,0,0.75)';
+      ctx.fillRect(0, 140, 400, 90);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('GAME OVER - Press A', 200, 192);
+    }
+  }, 135);
 }
 
-/* ===========================================================================
-   4. TIC-TAC-TOE (Smart AI Bot + 2P Local)
-   =========================================================================== */
-function initTicTacToe(stage) {
-  var vsAi = true;
-  var board = ['', '', '', '', '', '', '', '', ''];
-  var turn = 'X';
-  var gameOver = false;
-  var scoreX = 0, scoreO = 0;
-
+/* --- A2. MINESWEEPER --- */
+function initMinesweeper(stage) {
   stage.innerHTML =
-    '<div class="toolbar-row">' +
-      '<button class="flat-btn green" id="ttt-mode">Mode: 1P vs Smart AI</button>' +
-      '<div class="status-pill" id="ttt-status">Turn: X | Score X: 0 - O: 0</div>' +
-      '<button class="flat-btn purple" id="ttt-next">New Round</button>' +
+    '<div style="margin-bottom:6px;">' +
+      '<button id="ms-mode-btn" class="flat-btn active" onclick="toggleMsFlag()">Stylus: DIG (X)</button>' +
+      '<button class="flat-btn" onclick="initMinesweeper(document.getElementById(\'app-stage\'))">New Grid</button>' +
+      '<span id="ms-status" style="margin-left:14px; font-weight:bold; font-size:16px;">Avoid 10 Mines!</span>' +
     '</div>' +
-    '<div class="ttt-grid" id="ttt-grid"></div>';
+    '<div id="ms-board" style="width:360px; height:360px; margin:0 auto; background:#120e24;"></div>';
 
-  var gridEl = document.getElementById('ttt-grid');
-  var statusEl = document.getElementById('ttt-status');
+  var size = 9, mines = 10, flagMode = false, gameOver = false;
+  var board = [], revealed = [], flagged = [];
+  var curX = 4, curY = 4;
 
-  var wins = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
-  ];
-
-  function checkWinner(b) {
-    for (var i = 0; i < wins.length; i++) {
-      var a = wins[i][0], c = wins[i][1], d = wins[i][2];
-      if (b[a] && b[a] === b[c] && b[a] === b[d]) return { mark: b[a], line: wins[i] };
-    }
-    var full = true;
-    for (var j = 0; j < 9; j++) if (!b[j]) full = false;
-    return full ? { mark: 'DRAW', line: [] } : null;
+  for (var r=0; r<size; r++) {
+    board[r] = []; revealed[r] = []; flagged[r] = [];
+    for (var c=0; c<size; c++) { board[r][c] = 0; revealed[r][c] = false; flagged[r][c] = false; }
   }
-
-  function renderBoard(winLine) {
-    gridEl.innerHTML = '';
-    for (var i = 0; i < 9; i++) {
-      var cell = document.createElement('button');
-      cell.className = 'ttt-cell';
-      if (winLine && winLine.indexOf(i) !== -1) cell.classList.add('win');
-      cell.textContent = board[i];
-      cell.style.color = board[i] === 'X' ? '#ff5544' : '#5dade2';
-      (function(idx) {
-        cell.addEventListener('click', function() { playMove(idx); });
-      })(i);
-      gridEl.appendChild(cell);
+  var placed = 0;
+  while (placed < mines) {
+    var rr = Math.floor(Math.random()*size), cc = Math.floor(Math.random()*size);
+    if (board[rr][cc] !== -1) { board[rr][cc] = -1; placed++; }
+  }
+  for (var r2=0; r2<size; r2++) {
+    for (var c2=0; c2<size; c2++) {
+      if (board[r2][c2] === -1) continue;
+      var cnt = 0;
+      for (var dr=-1; dr<=1; dr++) for (var dc=-1; dc<=1; dc++) {
+        var nr = r2+dr, nc = c2+dc;
+        if (nr>=0 && nr<size && nc>=0 && nc<size && board[nr][nc]===-1) cnt++;
+      }
+      board[r2][c2] = cnt;
     }
   }
 
-  function aiChoose() {
-    // Win or Block
-    var marks = ['O', 'X'];
-    for (var m = 0; m < 2; m++) {
-      var mk = marks[m];
-      for (var i = 0; i < 9; i++) {
-        if (!board[i]) {
-          board[i] = mk;
-          var res = checkWinner(board);
-          board[i] = '';
-          if (res && res.mark === mk) return i;
+  window.toggleMsFlag = function() {
+    flagMode = !flagMode;
+    var btn = document.getElementById('ms-mode-btn');
+    if (btn) {
+      btn.innerHTML = flagMode ? 'Stylus: FLAG (X)' : 'Stylus: DIG (X)';
+      btn.className = flagMode ? 'flat-btn' : 'flat-btn active';
+    }
+    beep(500, 30);
+  };
+
+  function reveal(r, c) {
+    if (r<0 || r>=size || c<0 || c>=size || revealed[r][c] || flagged[r][c]) return;
+    revealed[r][c] = true;
+    if (board[r][c] === 0) {
+      for (var dr=-1; dr<=1; dr++) for (var dc=-1; dc<=1; dc++) reveal(r+dr, c+dc);
+    }
+  }
+
+  function clickCell(r, c) {
+    if (gameOver) return;
+    curX = c; curY = r;
+    if (flagMode) {
+      if (!revealed[r][c]) flagged[r][c] = !flagged[r][c];
+      beep(600, 30);
+    } else {
+      if (flagged[r][c]) return;
+      if (board[r][c] === -1) {
+        gameOver = true;
+        for (var i=0;i<size;i++) for (var j=0;j<size;j++) if (board[i][j]===-1) revealed[i][j]=true;
+        document.getElementById('ms-status').innerHTML = 'BOOM! Game Over';
+        beep(140, 250);
+      } else {
+        reveal(r, c);
+        beep(480, 25);
+        var safeLeft = 0;
+        for (var i2=0;i2<size;i2++) for (var j2=0;j2<size;j2++) if (board[i2][j2]!==-1 && !revealed[i2][j2]) safeLeft++;
+        if (safeLeft === 0) {
+          gameOver = true;
+          document.getElementById('ms-status').innerHTML = 'YOU CLEARED ALL MINES!';
+          beep(880, 200);
         }
       }
     }
-    if (!board[4]) return 4;
-    var corners = [0, 2, 6, 8];
-    for (var c = 0; c < corners.length; c++) if (!board[corners[c]]) return corners[c];
-    for (var k = 0; k < 9; k++) if (!board[k]) return k;
-    return -1;
+    drawGrid();
   }
 
-  function playMove(idx) {
-    if (gameOver || board[idx]) return;
-    board[idx] = turn;
-    SFX.gwTick();
-    var res = checkWinner(board);
-    if (res) {
-      gameOver = true;
-      if (res.mark === 'X') { scoreX++; SFX.win(); }
-      else if (res.mark === 'O') { scoreO++; SFX.gwMiss(); }
-      statusEl.textContent = (res.mark === 'DRAW' ? 'Draw Game!' : res.mark + ' Wins!') + ' | X:' + scoreX + ' O:' + scoreO;
-      renderBoard(res.line);
-      return;
-    }
-    turn = (turn === 'X') ? 'O' : 'X';
-    statusEl.textContent = 'Turn: ' + turn + ' | Score X:' + scoreX + ' - O:' + scoreO;
-    renderBoard([]);
-
-    if (vsAi && turn === 'O' && !gameOver) {
-      setTimeout(function() {
-        var pick = aiChoose();
-        if (pick !== -1) playMove(pick);
-      }, 220);
-    }
-  }
-
-  document.getElementById('ttt-mode').addEventListener('click', function() {
-    vsAi = !vsAi;
-    this.textContent = vsAi ? 'Mode: 1P vs Smart AI' : 'Mode: 2-Player Local';
-    board = ['', '', '', '', '', '', '', '', ''];
-    turn = 'X'; gameOver = false;
-    renderBoard([]);
-  });
-
-  document.getElementById('ttt-next').addEventListener('click', function() {
-    board = ['', '', '', '', '', '', '', '', ''];
-    turn = 'X'; gameOver = false;
-    statusEl.textContent = 'Turn: X | Score X:' + scoreX + ' - O:' + scoreO;
-    renderBoard([]);
-  });
-
-  renderBoard([]);
-}
-
-/* ===========================================================================
-   5. PICROSS (5x5 & 10x10 Nonograms with Fill/Mark Stylus Toggle)
-   =========================================================================== */
-function initPicross(stage) {
-  var puzzles = [
-    {
-      name: '5x5 Toadstool',
-      grid: [
-        [0,1,1,1,0],
-        [1,1,0,1,1],
-        [1,1,1,1,1],
-        [0,1,1,1,0],
-        [0,1,1,1,0]
-      ]
-    },
-    {
-      name: '5x5 Heart',
-      grid: [
-        [0,1,0,1,0],
-        [1,1,1,1,1],
-        [1,1,1,1,1],
-        [0,1,1,1,0],
-        [0,0,1,0,0]
-      ]
-    },
-    {
-      name: '10x10 GamePad',
-      grid: [
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,1,1,1,1,1,1,1,1,0],
-        [1,1,0,0,0,0,0,0,1,1],
-        [1,0,1,1,1,1,1,1,0,1],
-        [1,1,1,0,0,0,0,1,1,1],
-        [1,0,1,1,1,1,1,1,0,1],
-        [1,1,0,0,0,0,0,0,1,1],
-        [0,1,1,1,1,1,1,1,1,0],
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0]
-      ]
-    },
-    {
-      name: '10x10 Invader',
-      grid: [
-        [0,0,1,0,0,0,0,1,0,0],
-        [0,0,0,1,0,0,1,0,0,0],
-        [0,0,1,1,1,1,1,1,0,0],
-        [0,1,1,0,1,1,0,1,1,0],
-        [1,1,1,1,1,1,1,1,1,1],
-        [1,0,1,1,1,1,1,1,0,1],
-        [1,0,1,0,0,0,0,1,0,1],
-        [0,0,0,1,1,1,1,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0]
-      ]
-    }
-  ];
-
-  var curIdx = 0;
-  var markMode = false;
-  var state = [];
-
-  stage.innerHTML =
-    '<div class="toolbar-row">' +
-      '<button class="flat-btn" id="pic-prev">&#9664; Puzzle</button>' +
-      '<div class="status-pill" id="pic-title">5x5 Toadstool</div>' +
-      '<button class="flat-btn" id="pic-next">Puzzle &#9654;</button>' +
-      '<button class="flat-btn green" id="pic-mode">Stylus: FILL (&#9632;)</button>' +
-    '</div>' +
-    '<div id="pic-board" style="background:#0f0a21; padding:8px; border:2px solid #633483;"></div>';
-
-  var modeBtn = document.getElementById('pic-mode');
-  modeBtn.addEventListener('click', function() {
-    markMode = !markMode;
-    this.textContent = markMode ? 'Stylus: MARK (\u00D7)' : 'Stylus: FILL (\u25A0)';
-    this.className = markMode ? 'flat-btn red' : 'flat-btn green';
-    SFX.gwTick();
-  });
-
-  document.getElementById('pic-prev').addEventListener('click', function() {
-    curIdx = (curIdx + puzzles.length - 1) % puzzles.length;
-    loadPuzzle();
-  });
-  document.getElementById('pic-next').addEventListener('click', function() {
-    curIdx = (curIdx + 1) % puzzles.length;
-    loadPuzzle();
-  });
-
-  function getClues(arr) {
-    var clues = [], count = 0;
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === 1) count++;
-      else if (count > 0) { clues.push(count); count = 0; }
-    }
-    if (count > 0) clues.push(count);
-    return clues.length ? clues.join(' ') : '0';
-  }
-
-  function loadPuzzle() {
-    var p = puzzles[curIdx];
-    var size = p.grid.length;
-    document.getElementById('pic-title').textContent = p.name;
-    state = [];
-    for (var r = 0; r < size; r++) {
-      state[r] = [];
-      for (var c = 0; c < size; c++) state[r][c] = 0; // 0 empty, 1 filled, 2 X
-    }
-    renderGrid();
-  }
-
-  function renderGrid() {
-    var p = puzzles[curIdx];
-    var size = p.grid.length;
-    var cellPx = size === 5 ? 40 : 26;
-    var boardEl = document.getElementById('pic-board');
-
-    var html = '<table style="border-collapse:collapse;"><tr><td></td>';
-    for (var c = 0; c < size; c++) {
-      var colArr = [];
-      for (var r = 0; r < size; r++) colArr.push(p.grid[r][c]);
-      html += '<td style="text-align:center; font-size:12px; color:#b37aff; padding:2px 4px; vertical-align:bottom;">' +
-              getClues(colArr).split(' ').join('<br>') + '</td>';
-    }
-    html += '</tr>';
-
-    for (var r2 = 0; r2 < size; r2++) {
-      html += '<tr><td style="text-align:right; font-size:12px; color:#b37aff; padding:2px 6px; white-space:nowrap;">' +
-              getClues(p.grid[r2]) + '</td>';
-      for (var c2 = 0; c2 < size; c2++) {
-        var v = state[r2][c2];
-        var bg = v === 1 ? '#7b12f5' : '#292346';
-        var txt = v === 2 ? '\u00D7' : '';
-        html += '<td data-r="' + r2 + '" data-c="' + c2 + '" style="width:' + cellPx + 'px;height:' + cellPx + 'px;background:' + bg + ';border:1px solid #633483;text-align:center;font-weight:bold;color:#ff5544;cursor:pointer;">' + txt + '</td>';
+  function drawGrid() {
+    var b = document.getElementById('ms-board');
+    if (!b) return;
+    var html = '<table style="width:360px;height:360px;border-collapse:collapse;table-layout:fixed;">';
+    for (var r=0; r<size; r++) {
+      html += '<tr>';
+      for (var c=0; c<size; c++) {
+        var bg = revealed[r][c] ? '#2b2447' : '#633483';
+        var txt = '';
+        if (flagged[r][c]) txt = 'F';
+        else if (revealed[r][c]) {
+          if (board[r][c] === -1) { bg = '#850800'; txt = '*'; }
+          else if (board[r][c] > 0) txt = board[r][c];
+        }
+        var border = (r === curY && c === curX) ? '2px solid #fbd000' : '1px solid #191233';
+        html += '<td onclick="msTap(' + r + ',' + c + ')" style="background:' + bg + ';border:' + border + ';text-align:center;font-weight:bold;font-size:18px;cursor:pointer;">' + txt + '</td>';
       }
       html += '</tr>';
     }
     html += '</table>';
-    boardEl.innerHTML = html;
-
-    var cells = boardEl.querySelectorAll('td[data-r]');
-    for (var i = 0; i < cells.length; i++) {
-      cells[i].addEventListener('click', function() {
-        var rr = parseInt(this.getAttribute('data-r'), 10);
-        var cc = parseInt(this.getAttribute('data-c'), 10);
-        if (markMode) state[rr][cc] = (state[rr][cc] === 2) ? 0 : 2;
-        else state[rr][cc] = (state[rr][cc] === 1) ? 0 : 1;
-        SFX.gwTick();
-        renderGrid();
-        checkSolved();
-      });
-    }
+    b.innerHTML = html;
   }
 
-  function checkSolved() {
-    var p = puzzles[curIdx];
-    var size = p.grid.length;
-    for (var r = 0; r < size; r++) {
-      for (var c = 0; c < size; c++) {
-        var want = p.grid[r][c] === 1;
-        var got = state[r][c] === 1;
-        if (want !== got) return;
-      }
-    }
-    document.getElementById('pic-title').textContent = p.name + ' — SOLVED!';
-    SFX.win();
-  }
-
-  loadPuzzle();
+  window.msTap = clickCell;
+  customInputHandler = function(cmd) {
+    if (cmd === 'UP' && curY > 0) { curY--; drawGrid(); }
+    else if (cmd === 'DOWN' && curY < size-1) { curY++; drawGrid(); }
+    else if (cmd === 'LEFT' && curX > 0) { curX--; drawGrid(); }
+    else if (cmd === 'RIGHT' && curX < size-1) { curX++; drawGrid(); }
+    else if (cmd === 'A') clickCell(curY, curX);
+    else if (cmd === 'X') window.toggleMsFlag();
+  };
+  drawGrid();
 }
 
-/* ===========================================================================
-   6-10. FIVE (5) GAME & WATCH LCD MINIGAMES
-   (Ball, Fire, Helmet/Manhole, Chef, Octopus)
-   Authentic olive LCD background (#c5ccb8), active (#222922) & ghost (#b6bda8)
-   segments, Game A / Game B selector, and big Left/Right GamePad thumb buttons.
-   =========================================================================== */
-function initGameAndWatch(stage, gameId) {
+/* --- A3. PONG --- */
+function initPong(stage) {
   stage.innerHTML =
-    '<div class="gw-cabinet">' +
-      '<div class="gw-side-panel">' +
-        '<div class="gw-logo-plate">NINTENDO<br>GAME &amp; WATCH</div>' +
-        '<button class="gw-mode-btn active" id="gw-btn-a">GAME A</button>' +
-        '<button class="gw-mode-btn" id="gw-btn-b">GAME B</button>' +
-        '<button class="gw-big-btn" id="gw-left">&#9664;<br><span style="font-size:12px;">LEFT</span></button>' +
+    '<div style="margin-bottom:6px;">' +
+      '<button id="pong-1p" class="flat-btn active" onclick="setPongMode(false)">1P vs CPU</button>' +
+      '<button id="pong-2p" class="flat-btn" onclick="setPongMode(true)">2P Local</button>' +
+      '<span id="pong-score" style="font-size:18px;font-weight:bold;margin-left:16px;">0 - 0</span>' +
+    '</div>' +
+    '<canvas id="pong-cv" class="game-canvas" width="680" height="360"></canvas>';
+
+  var cv = document.getElementById('pong-cv');
+  var ctx = cv.getContext('2d');
+  var twoPlayer = false;
+  var p1Y = 140, p2Y = 140, s1 = 0, s2 = 0;
+  var ball = { x: 340, y: 180, vx: 6, vy: 4 };
+
+  window.setPongMode = function(is2P) {
+    twoPlayer = is2P;
+    document.getElementById('pong-1p').className = is2P ? 'flat-btn' : 'flat-btn active';
+    document.getElementById('pong-2p').className = is2P ? 'flat-btn active' : 'flat-btn';
+    s1 = 0; s2 = 0;
+  };
+
+  function onTouch(e) {
+    e.preventDefault();
+    var rect = cv.getBoundingClientRect();
+    var t = e.touches ? e.touches[0] : e;
+    if (!t) return;
+    var x = t.clientX - rect.left;
+    var y = t.clientY - rect.top - 35;
+    if (!twoPlayer || x < 340) p1Y = Math.max(0, Math.min(290, y));
+    else p2Y = Math.max(0, Math.min(290, y));
+  }
+  cv.addEventListener('touchmove', onTouch, false);
+  cv.addEventListener('mousemove', function(e){ if(e.buttons) onTouch(e); }, false);
+
+  customInputHandler = function(cmd) {
+    if (cmd === 'UP') p1Y = Math.max(0, p1Y - 26);
+    else if (cmd === 'DOWN') p1Y = Math.min(290, p1Y + 26);
+  };
+
+  activeLoop = setInterval(function() {
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+    if (ball.y <= 8 || ball.y >= 352) { ball.vy = -ball.vy; beep(420, 20); }
+
+    if (!twoPlayer) {
+      if (p2Y + 35 < ball.y - 6) p2Y = Math.min(290, p2Y + 4.2);
+      else if (p2Y + 35 > ball.y + 6) p2Y = Math.max(0, p2Y - 4.2);
+    }
+
+    if (ball.x <= 28 && ball.y >= p1Y && ball.y <= p1Y + 70) {
+      ball.vx = Math.abs(ball.vx);
+      beep(560, 30);
+    }
+    if (ball.x >= 652 && ball.y >= p2Y && ball.y <= p2Y + 70) {
+      ball.vx = -Math.abs(ball.vx);
+      beep(560, 30);
+    }
+    if (ball.x < 0) { s2++; ball = {x:340,y:180,vx:6,vy:4}; beep(200, 120); }
+    if (ball.x > 680) { s1++; ball = {x:340,y:180,vx:-6,vy:4}; beep(720, 120); }
+    document.getElementById('pong-score').innerHTML = s1 + ' - ' + s2;
+
+    ctx.fillStyle = '#0d0a1a';
+    ctx.fillRect(0, 0, 680, 360);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(14, p1Y, 12, 70);
+    ctx.fillRect(654, p2Y, 12, 70);
+    ctx.fillRect(ball.x - 6, ball.y - 6, 12, 12);
+  }, 25);
+}
+
+/* --- A4. TIC-TAC-TOE --- */
+function initTicTacToe(stage) {
+  stage.innerHTML =
+    '<div style="margin-bottom:8px;">' +
+      '<button id="ttt-ai" class="flat-btn active" onclick="setTttMode(true)">1P vs AI</button>' +
+      '<button id="ttt-2p" class="flat-btn" onclick="setTttMode(false)">2P Local</button>' +
+      '<button class="flat-btn" onclick="resetTtt()">Reset</button>' +
+      '<span id="ttt-msg" style="margin-left:14px;font-size:18px;font-weight:bold;">Your Turn (X)</span>' +
+    '</div>' +
+    '<div id="ttt-grid" style="width:330px;height:330px;margin:0 auto;"></div>';
+
+  var cells = ['','','','','','','','',''];
+  var turn = 'X', vsAi = true, over = false, focusIdx = 4;
+
+  window.setTttMode = function(ai) {
+    vsAi = ai;
+    document.getElementById('ttt-ai').className = ai ? 'flat-btn active' : 'flat-btn';
+    document.getElementById('ttt-2p').className = ai ? 'flat-btn' : 'flat-btn active';
+    window.resetTtt();
+  };
+
+  window.resetTtt = function() {
+    cells = ['','','','','','','','',''];
+    turn = 'X'; over = false;
+    document.getElementById('ttt-msg').innerHTML = 'Turn: X';
+    renderTtt();
+  };
+
+  function checkWinner() {
+    var wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    for (var i=0;i<wins.length;i++) {
+      var a=wins[i][0], b=wins[i][1], c=wins[i][2];
+      if (cells[a] && cells[a]===cells[b] && cells[a]===cells[c]) return cells[a];
+    }
+    for (var j=0;j<9;j++) if (!cells[j]) return null;
+    return 'DRAW';
+  }
+
+  window.tapTtt = function(idx) {
+    if (over || cells[idx]) return;
+    focusIdx = idx;
+    cells[idx] = turn;
+    beep(540, 35);
+    var res = checkWinner();
+    if (res) {
+      over = true;
+      document.getElementById('ttt-msg').innerHTML = (res === 'DRAW') ? 'Draw Game!' : (res + ' Wins!');
+      renderTtt();
+      return;
+    }
+    turn = (turn === 'X') ? 'O' : 'X';
+    document.getElementById('ttt-msg').innerHTML = 'Turn: ' + turn;
+    renderTtt();
+
+    if (vsAi && turn === 'O' && !over) {
+      setTimeout(function() {
+        var empty = [];
+        for (var i=0;i<9;i++) if (!cells[i]) empty.push(i);
+        if (empty.length) {
+          var pick = empty[Math.floor(Math.random()*empty.length)];
+          window.tapTtt(pick);
+        }
+      }, 220);
+    }
+  };
+
+  function renderTtt() {
+    var g = document.getElementById('ttt-grid');
+    if (!g) return;
+    var html = '<table style="width:330px;height:330px;border-collapse:collapse;table-layout:fixed;">';
+    for (var r=0;r<3;r++) {
+      html += '<tr>';
+      for (var c=0;c<3;c++) {
+        var idx = r*3 + c;
+        var brd = (idx === focusIdx) ? '3px solid #fbd000' : '2px solid #ffffff';
+        html += '<td onclick="tapTtt(' + idx + ')" style="background:#2b2447;border:' + brd + ';text-align:center;font-size:48px;font-weight:bold;cursor:pointer;">' + cells[idx] + '</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</table>';
+    g.innerHTML = html;
+  }
+
+  customInputHandler = function(cmd) {
+    if (cmd === 'UP' && focusIdx >= 3) { focusIdx -= 3; renderTtt(); }
+    else if (cmd === 'DOWN' && focusIdx <= 5) { focusIdx += 3; renderTtt(); }
+    else if (cmd === 'LEFT' && focusIdx % 3 > 0) { focusIdx--; renderTtt(); }
+    else if (cmd === 'RIGHT' && focusIdx % 3 < 2) { focusIdx++; renderTtt(); }
+    else if (cmd === 'A') window.tapTtt(focusIdx);
+  };
+  renderTtt();
+}
+
+/* --- A5. PICROSS (5x5 & 10x10) --- */
+function initPicross(stage) {
+  stage.innerHTML =
+    '<div style="margin-bottom:6px;">' +
+      '<button id="pic-5" class="flat-btn active" onclick="loadPicross(5)">5x5 Heart</button>' +
+      '<button id="pic-10" class="flat-btn" onclick="loadPicross(10)">10x10 Invader</button>' +
+      '<span id="pic-status" style="margin-left:14px;font-size:17px;font-weight:bold;">Fill matching tiles!</span>' +
+    '</div>' +
+    '<div id="pic-board" style="margin:0 auto;"></div>';
+
+  var pattern5 = [
+    [0,1,0,1,0],
+    [1,1,1,1,1],
+    [1,1,1,1,1],
+    [0,1,1,1,0],
+    [0,0,1,0,0]
+  ];
+  var pattern10 = [
+    [0,0,1,0,0,0,0,1,0,0],
+    [0,0,0,1,0,0,1,0,0,0],
+    [0,0,1,1,1,1,1,1,0,0],
+    [0,1,1,0,1,1,0,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,0,1,1,1,1,1,1,0,1],
+    [1,0,1,0,0,0,0,1,0,1],
+    [0,0,0,1,1,1,1,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]
+  ];
+
+  var curPattern = pattern5, sz = 5, user = [], curR = 0, curC = 0;
+
+  function getClue(arr) {
+    var out = [], run = 0;
+    for (var i=0;i<arr.length;i++) {
+      if (arr[i] === 1) run++;
+      else if (run > 0) { out.push(run); run = 0; }
+    }
+    if (run > 0) out.push(run);
+    return out.length ? out.join(' ') : '0';
+  }
+
+  window.loadPicross = function(n) {
+    sz = n;
+    curPattern = (n === 5) ? pattern5 : pattern10;
+    document.getElementById('pic-5').className = (n===5) ? 'flat-btn active' : 'flat-btn';
+    document.getElementById('pic-10').className = (n===10) ? 'flat-btn active' : 'flat-btn';
+    user = [];
+    for (var r=0;r<sz;r++) {
+      user[r] = [];
+      for (var c=0;c<sz;c++) user[r][c] = 0;
+    }
+    curR = 0; curC = 0;
+    document.getElementById('pic-status').innerHTML = 'Fill matching tiles!';
+    drawPicross();
+  };
+
+  window.tapPic = function(r, c) {
+    curR = r; curC = c;
+    user[r][c] = (user[r][c] + 1) % 3; // 0 empty, 1 filled, 2 X
+    beep(520, 25);
+    var solved = true;
+    for (var i=0;i<sz;i++) for (var j=0;j<sz;j++) {
+      var u = (user[i][j] === 1) ? 1 : 0;
+      if (u !== curPattern[i][j]) solved = false;
+    }
+    if (solved) {
+      document.getElementById('pic-status').innerHTML = 'PUZZLE SOLVED!';
+      beep(880, 200);
+    }
+    drawPicross();
+  };
+
+  function drawPicross() {
+    var cellPx = (sz === 5) ? 48 : 28;
+    var html = '<table style="margin:0 auto;border-collapse:collapse;"><tr><td></td>';
+    for (var c=0;c<sz;c++) {
+      var colArr = [];
+      for (var r=0;r<sz;r++) colArr.push(curPattern[r][c]);
+      html += '<td style="font-size:12px;color:#fbd000;padding:2px 4px;text-align:center;">' + getClue(colArr).replace(/ /g,'<br>') + '</td>';
+    }
+    html += '</tr>';
+    for (var r2=0;r2<sz;r2++) {
+      html += '<tr><td style="font-size:12px;color:#fbd000;padding:2px 6px;text-align:right;">' + getClue(curPattern[r2]) + '</td>';
+      for (var c2=0;c2<sz;c2++) {
+        var v = user[r2][c2];
+        var bg = (v === 1) ? '#ffffff' : '#2b2447';
+        var txt = (v === 2) ? 'X' : '';
+        var brd = (r2===curR && c2===curC) ? '2px solid #fbd000' : '1px solid #633483';
+        html += '<td onclick="tapPic(' + r2 + ',' + c2 + ')" style="width:' + cellPx + 'px;height:' + cellPx + 'px;background:' + bg + ';color:#ff3b30;border:' + brd + ';text-align:center;font-weight:bold;cursor:pointer;">' + txt + '</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</table>';
+    document.getElementById('pic-board').innerHTML = html;
+  }
+
+  customInputHandler = function(cmd) {
+    if (cmd === 'UP' && curR > 0) { curR--; drawPicross(); }
+    else if (cmd === 'DOWN' && curR < sz-1) { curR++; drawPicross(); }
+    else if (cmd === 'LEFT' && curC > 0) { curC--; drawPicross(); }
+    else if (cmd === 'RIGHT' && curC < sz-1) { curC++; drawPicross(); }
+    else if (cmd === 'A') window.tapPic(curR, curC);
+  };
+  window.loadPicross(5);
+}
+
+/* ============================================================================
+   7. FIVE (5) GAME & WATCH LCD MINIGAMES
+   ============================================================================ */
+function initGameAndWatch(stage, gwId) {
+  stage.innerHTML =
+    '<div id="gw-cabinet">' +
+      '<div style="margin-bottom:6px;">' +
+        '<button class="flat-btn active" onclick="setGwDiff(1)">GAME A</button>' +
+        '<button class="flat-btn" onclick="setGwDiff(2)">GAME B</button>' +
+        '<span id="gw-hud" style="margin-left:16px;font-family:monospace;font-size:18px;font-weight:bold;">SCORE: 000 | MISS: 0/3</span>' +
       '</div>' +
-      '<div class="gw-screen-bezel">' +
-        '<canvas id="gw-canvas" width="460" height="330"></canvas>' +
-      '</div>' +
-      '<div class="gw-side-panel">' +
-        '<div class="gw-logo-plate" id="gw-model-code">WIDE SCREEN</div>' +
-        '<div style="font-size:11px; color:#1a1a1a; font-weight:bold; text-align:center;">USE L/R OR<br>D-PAD</div>' +
-        '<button class="gw-big-btn" id="gw-right">&#9654;<br><span style="font-size:12px;">RIGHT</span></button>' +
-      '</div>' +
+      '<table class="game-layout-table"><tr>' +
+        '<td><button class="gw-action-btn" onclick="dispatchUnifiedCommand(\'LEFT\')">&#9664; LEFT</button></td>' +
+        '<td><canvas id="gw-screen" width="460" height="330"></canvas></td>' +
+        '<td><button class="gw-action-btn" onclick="dispatchUnifiedCommand(\'RIGHT\')">RIGHT &#9654;</button></td>' +
+      '</tr></table>' +
     '</div>';
 
-  var canvas = document.getElementById('gw-canvas');
-  var ctx = canvas.getContext('2d');
-  var ON = '#222922';
-  var GHOST = '#b5bca8';
+  var cv = document.getElementById('gw-screen');
+  var ctx = cv.getContext('2d');
+  var pos = 1; // 0, 1, 2
+  var score = 0, misses = 0, speedMult = 1;
+  var items = [{ lane: 0, step: 0, dir: 1 }];
+  var tick = 0;
 
-  var gameB = false;
-  var score = 0;
-  var misses = 0;
-  var pos = 1; // Player position index
-  var tickCount = 0;
-  var tickSpeed = 26;
+  window.setGwDiff = function(mult) {
+    speedMult = mult;
+    pos = 1; score = 0; misses = 0;
+    items = [{ lane: 0, step: 0, dir: 1 }];
+    if (mult === 2) items.push({ lane: 2, step: 2, dir: 1 });
+    beep(660, 60);
+  };
 
-  // Game-specific state
-  // 1. Ball: 3 arcs
-  var balls = [
-    { lane: 0, step: 0, dir: 1 },
-    { lane: 1, step: 2, dir: -1 },
-    { lane: 2, step: 4, dir: 1 }
-  ];
-  // 2. Fire: jumpers bouncing across steps 0..6 (catch at steps 1, 3, 5 in pos 0, 1, 2)
-  var jumpers = [{ step: 0 }];
-  // 3. Helmet/Manhole: falling tools in 3 lanes + pedestrians
-  var tools = [
-    { lane: 0, y: 0 },
-    { lane: 1, y: -2 },
-    { lane: 2, y: -4 }
-  ];
-  // 4. Chef: falling food in 3 pans
-  var foods = [
-    { lane: 0, y: 1, vy: 1 },
-    { lane: 1, y: 3, vy: -1 },
-    { lane: 2, y: 0, vy: 1 }
-  ];
-  // 5. Octopus: diver position 0..4 (0=boat, 1..3=sea, 4=chest), hasGold, 4 tentacles length 0..3
-  var diver = { pos: 0, gold: false };
-  var tentacles = [1, 2, 0, 2];
+  customInputHandler = function(cmd) {
+    if (cmd === 'LEFT' && pos > 0) { pos--; beep(360, 20); }
+    else if (cmd === 'RIGHT' && pos < 2) { pos++; beep(360, 20); }
+    else if (cmd === 'A' && misses >= 3) window.setGwDiff(speedMult);
+  };
 
-  function resetGW() {
-    score = 0;
-    misses = 0;
-    pos = 1;
-    tickCount = 0;
-    tickSpeed = gameB ? 18 : 25;
-    balls = [
-      { lane: 0, step: 0, dir: 1 },
-      { lane: 1, step: 2, dir: -1 },
-      { lane: 2, step: 1, dir: 1 }
-    ];
-    jumpers = [{ step: 0 }];
-    tools = [{ lane: 0, y: 0 }, { lane: 1, y: -2 }, { lane: 2, y: -4 }];
-    foods = [{ lane: 0, y: 1, vy: 1 }, { lane: 1, y: 2, vy: -1 }, { lane: 2, y: 0, vy: 1 }];
-    diver = { pos: 0, gold: false };
-    tentacles = [1, 2, 0, 2];
-  }
-
-  document.getElementById('gw-btn-a').addEventListener('click', function() {
-    gameB = false;
-    this.classList.add('active');
-    document.getElementById('gw-btn-b').classList.remove('active');
-    resetGW();
-  });
-  document.getElementById('gw-btn-b').addEventListener('click', function() {
-    gameB = true;
-    this.classList.add('active');
-    document.getElementById('gw-btn-a').classList.remove('active');
-    resetGW();
-  });
-
-  function moveLeft() {
-    if (misses >= 3) { resetGW(); return; }
-    if (gameId === 'gw-octopus') {
-      if (diver.pos > 0) {
-        diver.pos--;
-        SFX.gwTick();
-        if (diver.pos === 0 && diver.gold) {
-          diver.gold = false;
-          score += 10;
-          SFX.coin();
-        }
-      }
-    } else {
-      var maxPos = (gameId === 'gw-helmet') ? 3 : 2;
-      if (pos > 0) pos--;
-      SFX.gwTick();
-    }
-  }
-
-  function moveRight() {
-    if (misses >= 3) { resetGW(); return; }
-    if (gameId === 'gw-octopus') {
-      if (diver.pos < 4) {
-        diver.pos++;
-        SFX.gwTick();
-        if (diver.pos === 4) {
-          diver.gold = true;
-          score += 3;
-          SFX.gwCatch();
-        }
-      }
-    } else {
-      var maxPos = (gameId === 'gw-helmet') ? 3 : 2;
-      if (pos < maxPos) pos++;
-      SFX.gwTick();
-      if (gameId === 'gw-helmet' && pos === 3) {
-        score += 5;
-        SFX.coin();
-        setTimeout(function() { pos = 0; }, 180);
-      }
-    }
-  }
-
-  var btnL = document.getElementById('gw-left');
-  var btnR = document.getElementById('gw-right');
-  btnL.addEventListener('touchstart', function(e) { e.preventDefault(); moveLeft(); });
-  btnL.addEventListener('mousedown', moveLeft);
-  btnR.addEventListener('touchstart', function(e) { e.preventDefault(); moveRight(); });
-  btnR.addEventListener('mousedown', moveRight);
-
-  function onKey(e) {
-    if (e.key === 'ArrowLeft' || e.key === 'a') { e.preventDefault(); moveLeft(); }
-    if (e.key === 'ArrowRight' || e.key === 'd') { e.preventDefault(); moveRight(); }
-  }
-  window.addEventListener('keydown', onKey);
-  activeCleanup = function() { window.removeEventListener('keydown', onKey); };
-
-  function logicStep() {
+  activeLoop = setInterval(function() {
     if (misses >= 3) return;
-    SFX.gwTick();
-
-    if (gameId === 'gw-ball') {
-      for (var i = 0; i < balls.length; i++) {
-        if (!gameB && i === 2) continue; // Game A juggles 2 balls, Game B juggles 3
-        var b = balls[i];
-        b.step += b.dir;
-        if (b.step >= 4) {
-          if (pos === b.lane) {
-            b.dir = -1;
-            score++;
-            SFX.gwCatch();
+    tick++;
+    var stepInterval = (speedMult === 1) ? 5 : 3;
+    if (tick % stepInterval === 0) {
+      for (var i=0; i<items.length; i++) {
+        var it = items[i];
+        it.step += 1;
+        if (it.step >= 5) {
+          // Check catch/dodge at bottom step 5
+          var success = (gwId === 'gw_helmet' || gwId === 'gw_octopus') ? (pos !== it.lane) : (pos === it.lane);
+          if (success) {
+            score += 10;
+            beep(780, 35);
           } else {
             misses++;
-            SFX.gwMiss();
-            b.step = 0; b.dir = 1;
+            beep(150, 160);
           }
-        } else if (b.step <= 0) {
-          b.dir = 1;
+          it.step = 0;
+          it.lane = Math.floor(Math.random() * 3);
         }
       }
-    } else if (gameId === 'gw-fire') {
-      for (var j = jumpers.length - 1; j >= 0; j--) {
-        var jmp = jumpers[j];
-        jmp.step++;
-        if (jmp.step === 1 && pos !== 0) { misses++; SFX.gwMiss(); jumpers.splice(j, 1); }
-        else if (jmp.step === 3 && pos !== 1) { misses++; SFX.gwMiss(); jumpers.splice(j, 1); }
-        else if (jmp.step === 5 && pos !== 2) { misses++; SFX.gwMiss(); jumpers.splice(j, 1); }
-        else if (jmp.step === 1 || jmp.step === 3 || jmp.step === 5) {
-          score++;
-          SFX.gwCatch();
-        } else if (jmp.step >= 6) {
-          score += 3;
-          SFX.coin();
-          jumpers.splice(j, 1);
-        }
-      }
-      if (jumpers.length === 0 || (Math.random() < (gameB ? 0.35 : 0.22) && jumpers.length < 3)) {
-        jumpers.push({ step: 0 });
-      }
-    } else if (gameId === 'gw-helmet') {
-      for (var t = 0; t < tools.length; t++) {
-        tools[t].y++;
-        if (tools[t].y === 4) {
-          if (pos === tools[t].lane) {
-            misses++;
-            SFX.gwMiss();
-          } else {
-            score++;
-          }
-        }
-        if (tools[t].y > 4) {
-          tools[t].y = -Math.floor(Math.random() * 3);
-        }
-      }
-    } else if (gameId === 'gw-chef') {
-      for (var f = 0; f < foods.length; f++) {
-        if (!gameB && f === 2) continue;
-        var fd = foods[f];
-        fd.y += fd.vy;
-        if (fd.y >= 4) {
-          if (pos === fd.lane) {
-            fd.vy = -1;
-            score++;
-            SFX.gwCatch();
-          } else {
-            misses++;
-            SFX.gwMiss();
-            fd.y = 0; fd.vy = 1;
-          }
-        } else if (fd.y <= 0) {
-          fd.vy = 1;
-        }
-      }
-    } else if (gameId === 'gw-octopus') {
-      for (var k = 0; k < 4; k++) {
-        tentacles[k] = (tentacles[k] + (Math.random() < 0.6 ? 1 : 0)) % 4;
-      }
-      if (diver.pos >= 1 && diver.pos <= 3) {
-        if (tentacles[diver.pos - 1] === 3) {
-          misses++;
-          SFX.gwMiss();
-          diver.pos = 0;
-          diver.gold = false;
-        }
-      }
+      document.getElementById('gw-hud').innerHTML = 'SCORE: ' + score + ' | MISS: ' + misses + '/3';
     }
-  }
 
-  function drawLCD() {
-    ctx.fillStyle = '#c5ccb8';
+    // Render Authentic Monotone LCD Segments
+    ctx.fillStyle = '#9ead86';
     ctx.fillRect(0, 0, 460, 330);
 
-    // Top HUD: GAME A/B, SCORE, MISS
-    ctx.fillStyle = ON;
-    ctx.font = 'bold 16px "Courier New", monospace';
-    ctx.textAlign = 'left';
-    ctx.fillText(gameB ? 'GAME B' : 'GAME A', 14, 24);
-    ctx.font = 'bold 26px "Courier New", monospace';
-    ctx.textAlign = 'right';
-    ctx.fillText(('0000' + score).slice(-4), 444, 28);
-
-    // Miss icons
-    ctx.font = 'bold 14px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('MISS', 230, 20);
-    for (var m = 0; m < 3; m++) {
-      ctx.fillStyle = (m < misses) ? '#850800' : GHOST;
-      ctx.beginPath();
-      ctx.arc(206 + m * 24, 34, 7, 0, Math.PI * 2);
-      ctx.fill();
+    // Ghost Segments
+    var lanesX = [100, 230, 360];
+    for (var l=0; l<3; l++) {
+      for (var s=0; s<5; s++) {
+        ctx.fillStyle = 'rgba(34,37,30,0.12)';
+        ctx.fillRect(lanesX[l]-14, 30 + s*44, 28, 22);
+      }
+      ctx.fillStyle = (pos === l) ? '#22251e' : 'rgba(34,37,30,0.12)';
+      // Draw Player LCD figure at bottom
+      ctx.fillRect(lanesX[l]-24, 265, 48, 16);
+      ctx.beginPath(); ctx.arc(lanesX[l], 250, 11, 0, Math.PI*2); ctx.fill();
     }
 
-    // Specific LCD Scene Drawing
-    if (gameId === 'gw-ball') {
-      var lanesX = [140, 230, 320];
-      for (var l = 0; l < 3; l++) {
-        for (var s = 0; s <= 4; s++) {
-          var active = false;
-          for (var bi = 0; bi < (gameB ? 3 : 2); bi++) {
-            if (balls[bi].lane === l && balls[bi].step === s) active = true;
-          }
-          ctx.fillStyle = active ? ON : GHOST;
-          ctx.beginPath();
-          ctx.arc(lanesX[l], 70 + s * 42, 11, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        // Juggler Hands
-        ctx.fillStyle = (pos === l) ? ON : GHOST;
-        ctx.fillRect(lanesX[l] - 24, 260, 48, 12);
-        ctx.fillRect(lanesX[l] - 8, 272, 16, 36);
-      }
-    } else if (gameId === 'gw-fire') {
-      // Burning Building on Left & Ambulance on Right
-      ctx.fillStyle = ON;
-      ctx.fillRect(10, 50, 46, 240);
-      ctx.fillStyle = '#c5ccb8';
-      ctx.fillRect(20, 70, 24, 24);
-      ctx.fillRect(20, 120, 24, 24);
-      ctx.fillStyle = ON;
-      ctx.fillRect(390, 210, 60, 70);
-      ctx.fillStyle = '#850800';
-      ctx.fillRect(414, 228, 16, 6);
-      ctx.fillRect(419, 223, 6, 16);
-
-      var stepCoords = [
-        {x: 75, y: 85},
-        {x: 115, y: 235},
-        {x: 175, y: 110},
-        {x: 230, y: 235},
-        {x: 290, y: 120},
-        {x: 345, y: 235},
-        {x: 405, y: 195}
-      ];
-      for (var st = 0; st < stepCoords.length; st++) {
-        var hasJ = false;
-        for (var ji = 0; ji < jumpers.length; ji++) if (jumpers[ji].step === st) hasJ = true;
-        ctx.fillStyle = hasJ ? ON : GHOST;
-        ctx.beginPath();
-        ctx.arc(stepCoords[st].x, stepCoords[st].y, 12, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      var netX = [115, 230, 345];
-      for (var np = 0; np < 3; np++) {
-        ctx.fillStyle = (pos === np) ? ON : GHOST;
-        ctx.fillRect(netX[np] - 32, 265, 64, 12);
-        ctx.fillRect(netX[np] - 36, 250, 10, 36);
-        ctx.fillRect(netX[np] + 26, 250, 10, 36);
-      }
-    } else if (gameId === 'gw-helmet') {
-      // Doors on Left & Right
-      ctx.fillStyle = ON;
-      ctx.fillRect(16, 190, 36, 95);
-      ctx.fillRect(408, 190, 36, 95);
-      var hLanes = [110, 200, 290, 375];
-      for (var tl = 0; tl < 3; tl++) {
-        for (var ty = 0; ty <= 4; ty++) {
-          var toolOn = (tools[tl].y === ty);
-          ctx.fillStyle = toolOn ? ON : GHOST;
-          ctx.fillRect(hLanes[tl] - 12, 65 + ty * 38, 24, 12);
-        }
-      }
-      for (var hp = 0; hp < 4; hp++) {
-        ctx.fillStyle = (pos === hp) ? ON : GHOST;
-        ctx.beginPath();
-        ctx.arc(hLanes[hp], 255, 16, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillRect(hLanes[hp] - 12, 272, 24, 24);
-      }
-    } else if (gameId === 'gw-chef') {
-      var cLanes = [130, 230, 330];
-      for (var cl = 0; cl < 3; cl++) {
-        for (var cy = 0; cy <= 4; cy++) {
-          var foodOn = false;
-          for (var fi = 0; fi < (gameB ? 3 : 2); fi++) {
-            if (foods[fi].lane === cl && foods[fi].y === cy) foodOn = true;
-          }
-          ctx.fillStyle = foodOn ? ON : GHOST;
-          ctx.fillRect(cLanes[cl] - 20, 65 + cy * 40, 40, 10);
-        }
-        ctx.fillStyle = (pos === cl) ? ON : GHOST;
-        ctx.fillRect(cLanes[cl] - 28, 255, 56, 10);
-        ctx.fillRect(cLanes[cl] - 10, 268, 20, 34);
-      }
-    } else if (gameId === 'gw-octopus') {
-      // Boat on top-left, Chest on bottom-right, Octopus in center
-      ctx.fillStyle = ON;
-      ctx.fillRect(20, 58, 80, 22);
-      ctx.fillRect(365, 255, 65, 40);
-      ctx.beginPath();
-      ctx.ellipse(250, 110, 55, 36, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      var dCoords = [
-        {x: 60, y: 45},
-        {x: 120, y: 255},
-        {x: 195, y: 255},
-        {x: 270, y: 255},
-        {x: 345, y: 265}
-      ];
-      for (var k = 0; k < 3; k++) {
-        for (var seg = 1; seg <= 3; seg++) {
-          ctx.fillStyle = (tentacles[k] >= seg) ? ON : GHOST;
-          ctx.fillRect(112 + k * 75, 130 + seg * 30, 18, 24);
-        }
-      }
-      for (var dp = 0; dp < 5; dp++) {
-        ctx.fillStyle = (diver.pos === dp) ? ON : GHOST;
-        ctx.beginPath();
-        ctx.arc(dCoords[dp].x, dCoords[dp].y, 14, 0, Math.PI * 2);
-        ctx.fill();
-        if (diver.pos === dp && diver.gold) {
-          ctx.fillStyle = '#850800';
-          ctx.fillRect(dCoords[dp].x - 8, dCoords[dp].y + 16, 16, 10);
-        }
-      }
+    // Active Falling/Moving LCD Segments
+    ctx.fillStyle = '#22251e';
+    for (var k=0; k<items.length; k++) {
+      var item = items[k];
+      var ix = lanesX[item.lane];
+      var iy = 30 + item.step * 44;
+      ctx.fillRect(ix - 14, iy, 28, 22);
     }
 
     if (misses >= 3) {
-      ctx.fillStyle = '#850800';
-      ctx.fillRect(110, 135, 240, 64);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 22px Arial';
+      ctx.fillStyle = '#22251e';
+      ctx.font = 'bold 26px monospace';
       ctx.textAlign = 'center';
-      ctx.fillText('GAME OVER', 230, 165);
-      ctx.font = '13px Arial';
-      ctx.fillText('Press LEFT or RIGHT to restart', 230, 186);
+      ctx.fillText('GAME OVER - PRESS A', 230, 165);
     }
-  }
-
-  function frame() {
-    tickCount++;
-    if (tickCount >= tickSpeed) {
-      tickCount = 0;
-      logicStep();
-    }
-    drawLCD();
-  }
-
-  resetGW();
-  drawLCD();
-  activeLoop = setInterval(frame, 1000 / 60);
+  }, 110);
 }
 
-/* ===========================================================================
-   11. PAINT TOOL (Wii U Stylus Sketchpad with Swatches & Sizes)
-   =========================================================================== */
+/* ============================================================================
+   8. UTILITIES & TOOLS (PAINT, CALCULATOR, TIMER)
+   ============================================================================ */
+
+/* --- C1. PAINT TOOL --- */
 function initPaint(stage) {
-  var colors = ['#000000', '#ffffff', '#ff2a2a', '#ff8800', '#ffee00', '#2aff55', '#00d8ff', '#2a55ff', '#7b12f5', '#ff44cc', '#885522', '#808080'];
-  var curColor = '#000000';
-  var curSize = 6;
-  var drawing = false;
-  var lastPt = null;
-
-  var swatchesHtml = '';
-  for (var i = 0; i < colors.length; i++) {
-    swatchesHtml += '<button class="paint-swatch" data-col="' + colors[i] + '" style="width:28px;height:28px;background:' + colors[i] + ';border:2px solid #ffffff;border-radius:4px;cursor:pointer;"></button>';
-  }
-
   stage.innerHTML =
-    '<div class="toolbar-row">' +
-      swatchesHtml +
-      '<button class="flat-btn" data-sz="3">S</button>' +
-      '<button class="flat-btn active" data-sz="7">M</button>' +
-      '<button class="flat-btn" data-sz="14">L</button>' +
-      '<button class="flat-btn red" id="paint-clear">Clear</button>' +
+    '<div style="margin-bottom:6px;">' +
+      '<button class="flat-btn" style="background:#000" onclick="setPaintCol(\'#000000\')">Black</button>' +
+      '<button class="flat-btn" style="background:#e52521" onclick="setPaintCol(\'#e52521\')">Red</button>' +
+      '<button class="flat-btn" style="background:#007aff" onclick="setPaintCol(\'#007aff\')">Blue</button>' +
+      '<button class="flat-btn" style="background:#4cd964;color:#000" onclick="setPaintCol(\'#4cd964\')">Green</button>' +
+      '<button class="flat-btn" style="background:#fbd000;color:#000" onclick="setPaintCol(\'#fbd000\')">Yellow</button>' +
+      '<button class="flat-btn" onclick="setPaintSize(4)">Thin</button>' +
+      '<button class="flat-btn" onclick="setPaintSize(12)">Thick</button>' +
+      '<button class="flat-btn" onclick="clearPaint()">Clear</button>' +
     '</div>' +
-    '<canvas id="paint-canvas" width="680" height="330" style="background:#ffffff; border:3px solid #633483; touch-action:none; cursor:crosshair;"></canvas>';
+    '<canvas id="paint-cv" width="760" height="368" style="background:#ffffff;border:2px solid #7b12f5;display:block;margin:0 auto;"></canvas>';
 
-  var canvas = document.getElementById('paint-canvas');
-  var ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var cv = document.getElementById('paint-cv');
+  var ctx = cv.getContext('2d');
+  var col = '#000000', sz = 5, drawing = false, lastX = 0, lastY = 0;
 
-  var swBtns = stage.querySelectorAll('.paint-swatch');
-  for (var s = 0; s < swBtns.length; s++) {
-    swBtns[s].addEventListener('click', function() {
-      curColor = this.getAttribute('data-col');
-      SFX.gwTick();
-    });
-  }
-
-  var szBtns = stage.querySelectorAll('button[data-sz]');
-  for (var z = 0; z < szBtns.length; z++) {
-    szBtns[z].addEventListener('click', function() {
-      curSize = parseInt(this.getAttribute('data-sz'), 10);
-      SFX.gwTick();
-    });
-  }
-
-  document.getElementById('paint-clear').addEventListener('click', function() {
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    SFX.gwMiss();
-  });
+  window.setPaintCol = function(c) { col = c; beep(520, 20); };
+  window.setPaintSize = function(s) { sz = s; beep(620, 20); };
+  window.clearPaint = function() { ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,760,368); beep(300, 50); };
+  window.clearPaint();
 
   function getPos(e) {
-    var rect = canvas.getBoundingClientRect();
-    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return {
-      x: (clientX - rect.left) * (canvas.width / rect.width),
-      y: (clientY - rect.top) * (canvas.height / rect.height)
-    };
+    var r = cv.getBoundingClientRect();
+    var t = (e.touches && e.touches[0]) ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
   }
-
-  function startDraw(e) {
-    e.preventDefault();
-    drawing = true;
-    lastPt = getPos(e);
-    ctx.fillStyle = curColor;
-    ctx.beginPath();
-    ctx.arc(lastPt.x, lastPt.y, curSize / 2, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  function moveDraw(e) {
+  function start(e) { e.preventDefault(); drawing = true; var p = getPos(e); lastX = p.x; lastY = p.y; }
+  function move(e) {
     if (!drawing) return;
     e.preventDefault();
-    var pt = getPos(e);
-    ctx.strokeStyle = curColor;
-    ctx.lineWidth = curSize;
+    var p = getPos(e);
+    ctx.strokeStyle = col;
+    ctx.lineWidth = sz;
     ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(lastPt.x, lastPt.y);
-    ctx.lineTo(pt.x, pt.y);
-    ctx.stroke();
-    lastPt = pt;
+    ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(p.x, p.y); ctx.stroke();
+    lastX = p.x; lastY = p.y;
   }
+  function end() { drawing = false; }
 
-  function endDraw() { drawing = false; }
-
-  canvas.addEventListener('mousedown', startDraw);
-  canvas.addEventListener('mousemove', moveDraw);
-  window.addEventListener('mouseup', endDraw);
-  canvas.addEventListener('touchstart', startDraw);
-  canvas.addEventListener('touchmove', moveDraw);
-  canvas.addEventListener('touchend', endDraw);
+  cv.addEventListener('mousedown', start, false);
+  cv.addEventListener('mousemove', move, false);
+  window.addEventListener('mouseup', end, false);
+  cv.addEventListener('touchstart', start, false);
+  cv.addEventListener('touchmove', move, false);
+  cv.addEventListener('touchend', end, false);
 }
 
-/* ===========================================================================
-   12. CALCULATOR (Large Touch Buttons + √, %, ±, Basic Arithmetic)
-   =========================================================================== */
+/* --- C2. CALCULATOR --- */
 function initCalculator(stage) {
-  stage.innerHTML =
-    '<div class="calc-box">' +
-      '<div class="calc-screen" id="calc-disp">0</div>' +
-      '<div class="calc-grid">' +
-        '<button class="calc-key op" data-k="C">C</button>' +
-        '<button class="calc-key op" data-k="SQRT">&radic;</button>' +
-        '<button class="calc-key op" data-k="%">%</button>' +
-        '<button class="calc-key op" data-k="/">&divide;</button>' +
-        '<button class="calc-key" data-k="7">7</button>' +
-        '<button class="calc-key" data-k="8">8</button>' +
-        '<button class="calc-key" data-k="9">9</button>' +
-        '<button class="calc-key op" data-k="*">&times;</button>' +
-        '<button class="calc-key" data-k="4">4</button>' +
-        '<button class="calc-key" data-k="5">5</button>' +
-        '<button class="calc-key" data-k="6">6</button>' +
-        '<button class="calc-key op" data-k="-">&minus;</button>' +
-        '<button class="calc-key" data-k="1">1</button>' +
-        '<button class="calc-key" data-k="2">2</button>' +
-        '<button class="calc-key" data-k="3">3</button>' +
-        '<button class="calc-key op" data-k="+">+</button>' +
-        '<button class="calc-key" data-k="±">&plusmn;</button>' +
-        '<button class="calc-key" data-k="0">0</button>' +
-        '<button class="calc-key" data-k=".">.</button>' +
-        '<button class="calc-key eq" data-k="=">=</button>' +
-      '</div>' +
-    '</div>';
-
-  var disp = document.getElementById('calc-disp');
-  var cur = '0';
-  var prev = null;
-  var op = null;
-  var resetNext = false;
-
-  function updateScreen() {
-    disp.textContent = cur.slice(0, 14);
+  var keys = [
+    ['C', '√', '%', '/'],
+    ['7', '8', '9', '*'],
+    ['4', '5', '6', '-'],
+    ['1', '2', '3', '+'],
+    ['0', '.', '=', '=']
+  ];
+  var html = '<div style="width:360px;margin:0 auto;background:#120e24;padding:10px;border:2px solid #ffffff;">' +
+    '<div id="calc-disp" style="height:52px;background:#9ead86;color:#111;font-size:28px;font-weight:bold;text-align:right;line-height:52px;padding:0 10px;margin-bottom:8px;overflow:hidden;">0</div>' +
+    '<table style="width:100%;border-collapse:collapse;table-layout:fixed;">';
+  for (var r=0; r<keys.length; r++) {
+    html += '<tr>';
+    for (var c=0; c<4; c++) {
+      var k = keys[r][c];
+      html += '<td onclick="pressCalc(\'' + k + '\')" style="height:56px;background:#633483;border:3px solid #120e24;text-align:center;font-size:22px;font-weight:bold;cursor:pointer;">' + k + '</td>';
+    }
+    html += '</tr>';
   }
+  html += '</table></div>';
+  stage.innerHTML = html;
 
-  function compute() {
-    if (prev === null || !op) return;
-    var a = parseFloat(prev);
-    var b = parseFloat(cur);
-    var res = 0;
-    if (op === '+') res = a + b;
-    if (op === '-') res = a - b;
-    if (op === '*') res = a * b;
-    if (op === '/') res = b === 0 ? 'ERR' : a / b;
-    cur = String(res);
-    prev = null;
-    op = null;
-    resetNext = true;
-  }
-
-  var keys = stage.querySelectorAll('.calc-key');
-  for (var i = 0; i < keys.length; i++) {
-    keys[i].addEventListener('click', function() {
-      var k = this.getAttribute('data-k');
-      SFX.gwTick();
-      if (k >= '0' && k <= '9') {
-        if (cur === '0' || resetNext) { cur = k; resetNext = false; }
-        else cur += k;
-      } else if (k === '.') {
-        if (cur.indexOf('.') === -1) cur += '.';
-      } else if (k === 'C') {
-        cur = '0'; prev = null; op = null;
-      } else if (k === '±') {
-        cur = String(parseFloat(cur) * -1);
-      } else if (k === '%') {
-        cur = String(parseFloat(cur) / 100);
-      } else if (k === 'SQRT') {
-        var v = parseFloat(cur);
-        cur = v < 0 ? 'ERR' : String(Math.sqrt(v));
-        resetNext = true;
-      } else if (k === '=') {
-        compute();
-        SFX.coin();
-      } else {
-        if (prev !== null && !resetNext) compute();
-        prev = cur;
-        op = k;
-        resetNext = true;
-      }
-      updateScreen();
-    });
-  }
+  var expr = '';
+  window.pressCalc = function(k) {
+    beep(540, 25);
+    var d = document.getElementById('calc-disp');
+    if (k === 'C') { expr = ''; d.innerHTML = '0'; }
+    else if (k === '√') {
+      var v = parseFloat(expr || '0');
+      expr = String(Math.sqrt(v));
+      d.innerHTML = expr.slice(0, 12);
+    } else if (k === '=') {
+      try {
+        expr = String(eval(expr || '0'));
+        d.innerHTML = expr.slice(0, 12);
+      } catch(e) { d.innerHTML = 'ERR'; expr = ''; }
+    } else {
+      expr += k;
+      d.innerHTML = expr.slice(-12);
+    }
+  };
 }
 
-/* ===========================================================================
-   13. TIMER / STOPWATCH (Precision Stopwatch & Visual Alarm Countdown)
-   =========================================================================== */
+/* --- C3. TIMER & STOPWATCH --- */
 function initTimer(stage) {
-  var mode = 'stopwatch';
-  var running = false;
-  var swElapsed = 0;
-  var cdRemain = 60000;
-  var lastTick = Date.now();
-  var alarmActive = false;
-
   stage.innerHTML =
-    '<div class="toolbar-row">' +
-      '<button class="flat-btn active" id="tm-sw">Stopwatch</button>' +
-      '<button class="flat-btn" id="tm-cd">Countdown Timer</button>' +
-    '</div>' +
-    '<div id="tm-box" style="background:#0f0a21; border:3px solid #633483; border-radius:10px; padding:20px 32px; text-align:center; min-width:380px;">' +
-      '<div id="tm-digits" style="font-family:Courier New,monospace; font-size:52px; font-weight:bold; color:#ffffff; margin-bottom:14px;">00:00.0</div>' +
-      '<div id="tm-presets" class="toolbar-row" style="display:none; margin-bottom:12px;">' +
-        '<button class="flat-btn" data-add="60000">+1 Min</button>' +
-        '<button class="flat-btn" data-add="10000">+10 Sec</button>' +
-        '<button class="flat-btn" data-add="-10000">-10 Sec</button>' +
-      '</div>' +
-      '<div class="toolbar-row">' +
-        '<button class="flat-btn green" id="tm-start" style="font-size:18px; padding:8px 22px;">Start</button>' +
-        '<button class="flat-btn red" id="tm-reset" style="font-size:18px; padding:8px 22px;">Reset</button>' +
+    '<div id="timer-box" style="width:520px;margin:20px auto;background:#120e24;border:3px solid #ffffff;padding:24px;text-align:center;">' +
+      '<div id="timer-disp" style="font-size:64px;font-family:monospace;font-weight:bold;margin-bottom:18px;">00:00.0</div>' +
+      '<div>' +
+        '<button class="flat-btn active" onclick="startStopTimer()">Start / Pause (A)</button>' +
+        '<button class="flat-btn" onclick="resetTimer()">Reset</button>' +
+        '<button class="flat-btn" onclick="setCountdown(600)">+1 Min Countdown</button>' +
       '</div>' +
     '</div>';
 
-  var digitsEl = document.getElementById('tm-digits');
-  var boxEl = document.getElementById('tm-box');
-  var presetsEl = document.getElementById('tm-presets');
-  var startBtn = document.getElementById('tm-start');
-
-  function formatMs(ms) {
-    var totalSec = Math.floor(ms / 1000);
-    var mins = Math.floor(totalSec / 60);
-    var secs = totalSec % 60;
-    var tenths = Math.floor((ms % 1000) / 100);
-    return ('00' + mins).slice(-2) + ':' + ('00' + secs).slice(-2) + '.' + tenths;
+  var tenths = 0, running = false, countdown = false;
+  function fmt(t) {
+    var totalSec = Math.floor(t / 10);
+    var m = Math.floor(totalSec / 60);
+    var s = totalSec % 60;
+    var d = t % 10;
+    return (m<10?'0'+m:m) + ':' + (s<10?'0'+s:s) + '.' + d;
   }
+  window.startStopTimer = function() { running = !running; beep(600, 40); };
+  window.resetTimer = function() { running = false; tenths = 0; countdown = false; document.getElementById('timer-disp').innerHTML = '00:00.0'; beep(350, 40); };
+  window.setCountdown = function(add) { running = false; countdown = true; tenths += add; document.getElementById('timer-disp').innerHTML = fmt(tenths); beep(700, 40); };
 
-  function updateDisplay() {
-    digitsEl.textContent = formatMs(mode === 'stopwatch' ? swElapsed : cdRemain);
-  }
-
-  document.getElementById('tm-sw').addEventListener('click', function() {
-    mode = 'stopwatch'; running = false; alarmActive = false;
-    boxEl.style.backgroundColor = '#0f0a21';
-    presetsEl.style.display = 'none';
-    startBtn.textContent = 'Start';
-    updateDisplay();
-  });
-
-  document.getElementById('tm-cd').addEventListener('click', function() {
-    mode = 'countdown'; running = false; alarmActive = false;
-    boxEl.style.backgroundColor = '#0f0a21';
-    presetsEl.style.display = 'flex';
-    startBtn.textContent = 'Start';
-    updateDisplay();
-  });
-
-  var pBtns = presetsEl.querySelectorAll('button[data-add]');
-  for (var i = 0; i < pBtns.length; i++) {
-    pBtns[i].addEventListener('click', function() {
-      var delta = parseInt(this.getAttribute('data-add'), 10);
-      cdRemain = Math.max(0, cdRemain + delta);
-      SFX.gwTick();
-      updateDisplay();
-    });
-  }
-
-  startBtn.addEventListener('click', function() {
-    running = !running;
-    alarmActive = false;
-    boxEl.style.backgroundColor = '#0f0a21';
-    lastTick = Date.now();
-    this.textContent = running ? 'Pause' : 'Start';
-    SFX.gwTick();
-  });
-
-  document.getElementById('tm-reset').addEventListener('click', function() {
-    running = false;
-    alarmActive = false;
-    boxEl.style.backgroundColor = '#0f0a21';
-    if (mode === 'stopwatch') swElapsed = 0;
-    else cdRemain = 60000;
-    startBtn.textContent = 'Start';
-    SFX.gwTick();
-    updateDisplay();
-  });
+  customInputHandler = function(cmd) {
+    if (cmd === 'A') window.startStopTimer();
+  };
 
   activeLoop = setInterval(function() {
-    var now = Date.now();
-    var dt = now - lastTick;
-    lastTick = now;
-    if (running) {
-      if (mode === 'stopwatch') {
-        swElapsed += dt;
-      } else {
-        cdRemain -= dt;
-        if (cdRemain <= 0) {
-          cdRemain = 0;
-          running = false;
-          alarmActive = true;
-          startBtn.textContent = 'Start';
-          SFX.win();
-        }
+    if (!running) return;
+    if (countdown) {
+      tenths--;
+      if (tenths <= 0) {
+        tenths = 0; running = false;
+        beep(880, 350);
+        document.getElementById('timer-box').style.backgroundColor = '#850800';
       }
-      updateDisplay();
+    } else {
+      tenths++;
     }
-    if (alarmActive) {
-      boxEl.style.backgroundColor = (Math.floor(now / 250) % 2 === 0) ? '#850800' : '#0f0a21';
-    }
-  }, 50);
+    var el = document.getElementById('timer-disp');
+    if (el) el.innerHTML = fmt(tenths);
+  }, 100);
 }
 
-/* ===========================================================================
-   GLOBAL KEYBOARD & WII U GAMEPAD NAVIGATION IN THE HUB
-   =========================================================================== */
-window.addEventListener('keydown', function(e) {
-  if (activeAppId) {
-    if (e.key === 'Escape' || e.key === 'Backspace' && e.target.tagName !== 'INPUT') {
-      returnToHub();
-    }
-    return;
-  }
-
-  var tabOrder = ['games', 'gw', 'tools', 'about'];
-  var tIdx = tabOrder.indexOf(currentTab);
-
-  if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    switchTab(tabOrder[(tIdx + tabOrder.length - 1) % tabOrder.length]);
-  } else if (e.key === 'ArrowRight') {
-    e.preventDefault();
-    switchTab(tabOrder[(tIdx + 1) % tabOrder.length]);
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    if (selectedRowIndex > 0) {
-      selectedRowIndex--;
-      renderHubList();
-      var rows = document.querySelectorAll('.list-row');
-      if (rows[selectedRowIndex]) rows[selectedRowIndex].scrollIntoView({ block: 'nearest' });
-    }
-  } else if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    var rows2 = document.querySelectorAll('.list-row');
-    if (selectedRowIndex < rows2.length - 1) {
-      selectedRowIndex++;
-      renderHubList();
-      rows2 = document.querySelectorAll('.list-row');
-      if (rows2[selectedRowIndex]) rows2[selectedRowIndex].scrollIntoView({ block: 'nearest' });
-    }
-  } else if (e.key === 'Enter') {
-    var items = [];
-    for (var i = 0; i < APP_CATALOG.length; i++) {
-      if (APP_CATALOG[i].tab === currentTab) items.push(APP_CATALOG[i]);
-    }
-    if (items[selectedRowIndex]) {
-      SFX.gwTick();
-      openApp(items[selectedRowIndex].id);
-    }
-  }
-});
-
-// Boot the Hub on load
+/* Boot Hub on Load */
 window.onload = function() {
+  drawMarioSprite();
   renderHubList();
 };
 </script>
